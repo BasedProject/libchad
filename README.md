@@ -10,10 +10,6 @@ C libraries are hard to find; good libraries are even harder.
 
 > [!NOTE] `chad.h` includes all Chad libraries.
 
-| Lib    | Description |
-| :---   | :---------- |
-| chad.h | Includes all Chad libraries. |
-
 ### IO
 
 | Lib         | Description |
