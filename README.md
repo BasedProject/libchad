@@ -58,6 +58,7 @@ Complexity has its place: within its own library.
 ## Todo
 * peru is nice as a concept, but 1) depends on py-yaml, 2) yaml makes make me vomit from my eyes
 * code
+```sh
     file filesystem.h {
         int touch_file(const char * p);
         int touch_directory(const char * p);
@@ -91,13 +92,14 @@ Complexity has its place: within its own library.
     #  gcd(), lcm(), sq() /*square, after ino*/
     # trim() and pad() even tho its a meme
     # MB(n) etc. macros
-	#
-	# the linux kernel has a bunch of small, high quality utilities,
-	#  these should be inspected
-	# * minmax.h looks good; i wonder if it can be made N-arg
-	#    in_range does not with in _there_
-	# * array_size.h looks good
-	# * DIV_ROUND_UP
-	# * base64.h
-	# * crc?
-	# * glob.h
+    #
+    # the linux kernel has a bunch of small, high quality utilities,
+    #  these should be inspected
+    # * minmax.h looks good; i wonder if it can be made N-arg
+    #    in_range does not with in _there_
+    # * array_size.h looks good
+    # * DIV_ROUND_UP
+    # * base64.h
+    # * crc?
+    # * glob.h
+```
