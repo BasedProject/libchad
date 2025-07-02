@@ -98,4 +98,7 @@ Complexity has its place: within its own library.
     # * base64.h
     # * crc?
     # * glob.h
+    # 
+    # Same applies to plan9
+    # * libutf
 ```

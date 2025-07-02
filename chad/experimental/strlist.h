@@ -1,3 +1,6 @@
+#ifndef STRLIST_H
+#define STRLIST_H
+
 /* The string based list is a common pattern,
  *  as it is the most intuitive way to serialize a list.
  *
@@ -32,7 +35,7 @@ char * strlist_component(char * list, size_t n, sep_t sep);
 char * strlist_components(char * list, size_t from, size_t to, sep_t sep);
 
 /* The following are shorthands for component()/components(),
- *  with a specific numbers which may or may not be lenght specific
+ *  with a specific numbers which may or may not be length specific
  *
  * Visual explanation:
  *       this/is/my/example/path
@@ -47,7 +50,7 @@ char * strlist_head(char * list, sep_t sep);
 char * strlist_tail(char * list, sep_t sep);
 
 /* Notes:
- *  + we very contiously made the decision to not take a destination operand;
+ *  + we very consciously made the decision to not take a destination operand;
  *     you would have to allocate it just the same,
  *     copying the source string is not a real performance concern,
  *     but we want our interface to be as clean as possible
@@ -58,3 +61,5 @@ char * strlist_tail(char * list, sep_t sep);
  *      char name[] = "this/is/my.file.example";
  *      name = strlist_head(strlist_base(name, UNIX_PATH_SEP), EXT_SEP);
  */
+
+#endif
