@@ -13,7 +13,6 @@ C libraries are hard to find; good libraries are even harder.
 | Lib    | Description |
 | :---   | :---------- |
 | chad.h | Includes all Chad libraries. |
-| bits.h | Various miscellaneous functionalities. |
 
 ### IO
 
