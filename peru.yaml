@@ -1,0 +1,27 @@
+imports:
+    dictate:    extern/
+    qx:         extern/
+    remove_all: extern/
+    sds:        extern/
+    kvec:       extern/experimental/
+
+git module dictate:
+    url: https://github.com/agvxov/dictate.git
+    export: source/
+    pick:   source/
+
+git module kvec:
+    url: https://bis64wqhh3louusbd45iyj76kmn4rzw5ysawyan5bkxwyzihj67c5lid.onion/anon/kvec.git
+    pick: [kvec.h, klist.h]
+
+git module qx:
+    url: https://github.com/agvxov/qx.git
+    pick: qx.h
+
+git module remove_all:
+    url: https://github.com/agvxov/remove_all.git
+    pick: remove_all.h
+
+git module sds:
+    url: https://github.com/jcorporation/sds.git
+    pick: [sds.c, sds.h, sdsalloc.h]
