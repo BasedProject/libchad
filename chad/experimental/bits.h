@@ -8,7 +8,9 @@
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
-#define STRINGIFY(x) #x
+
+#define _STRINGIFY(...) # __VA_ARGS__
+#define STRINGIFY(...) _STRINGIFY(__VA_ARGS__)
 
 // could be a generic
 static inline
