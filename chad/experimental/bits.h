@@ -9,8 +9,16 @@
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
+/* Convert argument to a string literal.
+ */
 #define _STRINGIFY(...) # __VA_ARGS__
 #define STRINGIFY(...) _STRINGIFY(__VA_ARGS__)
+
+/* Prevent argument from being expended as a macro.
+ * Named after the POSIX shell rule that quoted strings are not checked for aliases.
+ */
+#define EMPTY()
+#define QUOTE(id) id EMPTY()
 
 // could be a generic
 static inline
