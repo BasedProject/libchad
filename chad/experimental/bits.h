@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <iso646>
 
-#define UNUSED(x)   ((void)x)
+#define UNUSED(x) ((void)x)
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
