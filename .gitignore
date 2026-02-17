@@ -3,3 +3,4 @@
 .peru/
 extern/
 object/
+*.pyz
