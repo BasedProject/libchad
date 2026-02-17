@@ -16,12 +16,24 @@ C libraries are hard to find; good libraries are even harder.
 | :---        | :---------- |
 | dictate.h   | Über-printer. |
 | plumblism.h | PBMplus (PNM) image IO. |
+// https://github.com/ClecioJung/ini (slight renaming and _Generic)
+// https://github.com/an-dr/microlog
 
 ### Datastructures
 
-| Lib    | Description |
-| :---   | :---------- |
-| sds.h  | Dynamic strings. |
+| Lib       | Description |
+| :---      | :---------- |
+| sds.h     | Dynamic strings. |
+| haste.h   | Type-safe generic containers optimized single threaded speed. |
+| strlist.h | String lists. |
+
+### Memory
+
+| Lib            | Description |
+| :---           | :---------- |
+| memory-units.h | Memory unit macros. |
+| zone.h         | Zone allocator. |
+// arena allocator
 
 ### Ported functionality
 
@@ -40,7 +52,6 @@ Experimental libraries on the other hand are volatile.
 | Lib    | Description |
 | :---   | :---------- |
 | bits.h | Various miscellaneous functionalities. |
-| kvec.h | Small, typesafe, generic datastructures optimized for speed. |
 
 ## Criteria
 
@@ -86,8 +97,6 @@ Complexity has its place: within its own library.
         }
     # something addressing math.h
     #  gcd(), lcm(), sq() /*square, after ino*/
-    # trim() and pad() even tho its a meme
-    # MB(n) etc. macros
     #
     # the linux kernel has a bunch of small, high quality utilities,
     #  these should be inspected
@@ -101,4 +110,14 @@ Complexity has its place: within its own library.
     # 
     # Same applies to plan9
     # * libutf
+    #
+    # and qlib
+    # * qencode
+    # * qcount
+    #
+    # Strings:
+    #   trim() and pad() even tho its a meme
+    #   slugify
+    #   reverse
+    #   case conversions
 ```

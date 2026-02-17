@@ -39,7 +39,7 @@
 thread_local long long require_v;
 
 #ifndef REQUIRE_TERMINATOR
-# define REQUIRE_TERMINATOR default_require_terminator
+# define REQUIRE_TERMINATOR(...) default_require_terminator(__VA_ARGS__)
 #endif
 
 [[ noreturn ]]

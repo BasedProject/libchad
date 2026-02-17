@@ -4,11 +4,11 @@ so:
 	${CC} -fPIC -shared ${SOURCE} -o object/libchad.so
 
 dist:
-	-mkdir object/chad/
+	-mkdir object/chad/ 2> /dev/null
 	for d in chad/ extern/; do \
-		pushd $$d; \
+		pushd $$d &> /dev/null; \
 		find ./ -type f -name '*.h' -exec cp --parents {} ../object/chad/ \; ; \
-		popd; \
+		popd &> /dev/null; \
 	done
 
 clean:
