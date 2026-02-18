@@ -1,7 +1,8 @@
+CFLAGS := -std=c23
 SOURCE := $(wildcard chad/*.c extern/*.c)
 
 so:
-	${CC} -fPIC -shared ${SOURCE} -o object/libchad.so
+	${CC} ${CFLAGS} -fPIC -shared ${SOURCE} -o object/libchad.so
 
 dist:
 	-mkdir object/chad/ 2> /dev/null
