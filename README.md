@@ -6,6 +6,25 @@
 ## Rationele
 C libraries are hard to find; good libraries are even harder.
 
+## Compatibility
+Libchad is standard C23.
+Individual components might be compatible with older standards.
+
+Headers must compile under C++17[^cpp].
+
+Linux is the primary target OS[^target],
+however compatibility with other UNIX-like operating systems should also be considered.
+Compatibility with Windows is NOT a concern.
+
+[^target]: This might be subject to change in the future,
+particularly to BSD when the Linux finally becomes too tightly integrated with cancerware,
+such as Rust and Systemd.
+
+[^cpp]: This requirement added for practicality.
+It might be subject to change specifically
+if some meta-programming based OOP solution for C
+gains appropriate maturity.
+
 ## Contents
 
 > [!NOTE] `chad.h` includes all Chad libraries.
