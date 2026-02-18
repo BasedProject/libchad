@@ -10,17 +10,19 @@
    double : fl, f64
    long double : fll, f128
 
-   NO_128_TYPES will not be defined if i128, s128, u128 exist.
+   NO_128_TYPES will be defined when i128, s128, u128 are absent.
    NO_F_TYPE_NAME will remove hazardous declarations of f, fl, and fll.
 
-   all floating bitmarked types will have F<NUM>_PRECISE defined
+   All floating bitmarked types will have F<NUM>_PRECISE defined
    if they are specified to that precise number of bits.
 
-   Tested to work with gcc 14.2.0 and clang 19.1.7 on Debian
+   Tested to work with gcc 14.2.0 and clang 19.1.7 on Debian // XXX: auto tests / auto comment
    Backwards compat for gcc 14.2.0
    Not robustly tested, please report issues.
 
    --- Definitions ---
+
+   // XXX too *many* macros
 
    Defining the following will change behavior within the typesystem.
    the IMPRECISE groupings will always be provided with their respective types are present in full.
