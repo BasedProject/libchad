@@ -5,6 +5,8 @@
 
 ## Rationele
 C libraries are hard to find; good libraries are even harder.
+Libchad is a collection of quality, general-purpose, high-level libraries
+aimed at modern C development.
 
 ## Compatibility
 Libchad is standard C23.
@@ -59,6 +61,7 @@ gains appropriate maturity.
 | Lib           | Lang  | Description |
 | :---          | :---: | :---------- |
 | qx.h          | Perl  | Capture output of exec. |
+| slurp.h       | Perl  | Simple reading/writing/modifying of complete files. |
 | remove\_all.h | C++   | Remove a directory recursively. |
 
 ---
@@ -73,13 +76,29 @@ Experimental libraries on the other hand are volatile.
 | bits.h | Various miscellaneous functionalities. |
 
 ## Criteria
-
 * A clear way in which the functionality can be described as.
 (e.g.: "generic datastructures" - good; "roguelike stuff" - bad)
 * Clean and simple interface which can be learned under a few minutes.
 Complexity has its place: within its own library.
 * Must be amalgamable into a single header.
 * No project-namespacing.
+* The top of the headers must have a *description comment*.
+* The *description comment* must be followed by declarations.
+* License comments may not take up more than 3 lines (worst case being a title, the license body and the list of people holding the copyright).
+* Each library must come with a `man(1)` compatible manual.
+
+## Recommendations
+Some subjects are outside of the scope of this project,
+but not outside of its interest.
+For such cases, a recommendations table exists.
+Any item on the recommendations table have been throughly reviewed
+and is believed to be the best-of-its-kind as of now.
+Consequently, only one item per subject should be provided
+and a clean-cut predicate to choose between items of similar subjects.
+
+| Library | Subject | Description |
+| :------ | :------ | :---------- |
+| XXX | XXX | XXX |
 
 ## Todo
 * peru is nice as a concept, but 1) depends on py-yaml, 2) yaml makes make me vomit from my eyes

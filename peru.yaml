@@ -3,25 +3,42 @@ imports:
     qx:         extern/
     remove_all: extern/
     sds:        extern/
+    strlist:    extern/
+    slurp:      extern/
     kvec:       extern/experimental/
 
 git module dictate:
     url: https://github.com/agvxov/dictate.git
     export: source/
     pick:   source/
+    rev: c3f53e3c3cd168f02dc200a324dbaa9642c4f8af
 
 git module kvec:
-    url: https://bis64wqhh3louusbd45iyj76kmn4rzw5ysawyan5bkxwyzihj67c5lid.onion/anon/kvec.git
-    pick: [kvec.h, klist.h]
+    url: https://github.com/agvxov/haste-containers.git
+    pick: [hvec.h, hlist.h]
+    rev: d24260750c255a6a671855ac4ab9d2ca41aa8536
 
 git module qx:
     url: https://github.com/agvxov/qx.git
     pick: qx.h
+    rev: 48d26ca90e2c5f146ebca8e6aa538897e27e7cd7
 
 git module remove_all:
     url: https://github.com/agvxov/remove_all.git
     pick: remove_all.h
+    rev: 03f32353f0f8a525db0350b901f7577d86644e7f
 
 git module sds:
     url: https://github.com/jcorporation/sds.git
     pick: [sds.c, sds.h, sdsalloc.h]
+    rev: a7752dc1f1cb5550b88f15d441920de0f4841509
+
+git module strlist:
+    url: https://github.com/agvxov/strlist.git
+    pick: strlist.h
+    rev: f51a214aebd7a8be6593b3a23d3038c596407537
+
+git module slurp:
+    url: https://github.com/agvxov/slurp.git
+    pick: slurp.h
+    rev: a1cd0aa0767dd5e407f75e312b71a2e54e05ed13
