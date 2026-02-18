@@ -1,7 +1,25 @@
-SOURCE := $(wildcard chad/*.c extern/*.c)
+CFLAGS := -std=c23 -fPIC
+CPPFLAGS := -Ichad
+SOURCE.orig := $(wildcard extern/*.c)
+SOURCE := $(SOURCE.orig:extern/%=%)
+OBJECT := $(addprefix object/,$(SOURCE:.c=.o))
 
-so:
-	${CC} -fPIC -shared ${SOURCE} -o object/libchad.so
+vpath %.c extern
+
+object/%.o: %.c
+	@echo "CC	$<"
+	@${COMPILE.c} -o $@ $<
+
+.PHONY: all
+all: object/libchad.a object/libchad.so
+
+object/libchad.a: ${OBJECT}
+	@echo "AR	$<"
+	@ar rcs $@ $+
+
+object/libchad.so: ${OBJECT}
+	@echo "SO	$<"
+	@${CC} ${CFLAGS} ${CPPFLAGS} -shared $+ -o $@
 
 dist:
 	-mkdir object/chad/ 2> /dev/null

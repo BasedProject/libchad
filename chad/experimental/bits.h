@@ -2,7 +2,7 @@
 #define CHAD_BITS_H
 
 #include <stdbool.h>
-#include <iso646>
+#include <iso646.h>
 
 #define UNUSED(x) ((void)x)
 
