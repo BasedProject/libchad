@@ -80,11 +80,6 @@ Complexity has its place: within its own library.
 
         int rename(const char * s, const char * d);
     }
-    file arena.h {
-        arena_t new_arena(size_t n_bytes);
-        void * arenaloc(arena_t * a, size_t n_bytes);
-        int free_arena(arena_t * a);
-    }
     tree chad/
         file nargs.h { // for narg hack functions?
             #define coalesce_env() // char * _coalesce_env(char * mydefault, size_t argc, ...)
@@ -107,13 +102,6 @@ Complexity has its place: within its own library.
     # * base64.h
     # * crc?
     # * glob.h
-    # 
-    # Same applies to plan9
-    # * libutf
-    #
-    # and qlib
-    # * qencode
-    # * qcount
     #
     # Strings:
     #   trim() and pad() even tho its a meme
@@ -121,3 +109,16 @@ Complexity has its place: within its own library.
     #   reverse
     #   case conversions
 ```
+
+The following items should be considered to be added to libchad, in some way or another:
++ [ ] Xandard
++ [ ] Plan9 (e.g. libutf)
++ [ ] [https://github.com/EasyMem/easy_memory](https://github.com/EasyMem/easy_memory)
++ [ ] [https://github.com/tarantula-org/camelot](https://github.com/tarantula-org/camelot)
++ [ ] [https://www.gnu.org/software/gnulib/manual/html_node/index.html](https://www.gnu.org/software/gnulib/manual/html_node/index.html)
++ [ ] [https://github.com/arp242/toml-c](https://github.com/arp242/toml-c)
++ [ ] [https://github.com/wolkykim/qlibc](https://github.com/wolkykim/qlibc) (qencode, qcount)
++ [ ] [https://github.com/swansontec/map-macro](https://github.com/swansontec/map-macro)
++ [ ] [https://www.boost.org/doc/libs/latest/libs/preprocessor/doc/index.html](https://www.boost.org/doc/libs/latest/libs/preprocessor/doc/index.html)
++ [ ] [https://github.com/ClecioJung/ini](https://github.com/ClecioJung/ini)
++ [ ] [https://github.com/arp242/toml-c](https://github.com/arp242/toml-c)
