@@ -162,3 +162,4 @@ The following items should be considered to be added to libchad, in some way or 
 + [ ] [https://github.com/arp242/toml-c](https://github.com/arp242/toml-c)
 + [ ] [https://git.enlightenment.org/enlightenment/efl](https://git.enlightenment.org/enlightenment/efl)
 + [ ] [https://github.com/scottt/debugbreak.git](https://github.com/scottt/debugbreak.git) (since the compatibility is a nightmare, maybe just provide `breakpoint()`, which is empty, but kept from being optimized away)
++ [ ] [https://gitlab.freedesktop.org/libbsd/](https://gitlab.freedesktop.org/libbsd/) (vis)
