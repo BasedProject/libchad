@@ -8,6 +8,8 @@
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define CLAMP(a, b, c) ((a) < (b) ? (b) : (a) > (c) ? (c) : (a))
+
 
 /* Convert argument to a string literal.
  */
