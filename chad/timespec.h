@@ -111,4 +111,4 @@ always_inline timespec_t timespec_min(timespec_t a, timespec_t b) {
       );
 }
 
-#endif	/* TIMESPEC_H */
+#endif /* TIMESPEC_H */
