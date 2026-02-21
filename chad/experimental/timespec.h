@@ -9,7 +9,9 @@
 /* -- consider this "LIKELY TO BE REVISED OR REMOVED!" */
 /* -- ESPECIALLY the generics and the from group */
 
-long TIMESPEC_HZ = 1000000000L;
+/* macro should be a macro */
+#define TIMESPEC_HZ TIMESPEC_HZ
+static long TIMESPEC_HZ = 1000000000L;
 
 typedef struct timespec timespec_t;
 
