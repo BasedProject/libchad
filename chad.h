@@ -1,8 +1,10 @@
 #ifndef CHAD_H
 #define CHAD_H
 // internal code
+#include "chad/experimental/timespec.h"
 #include "chad/experimental/bits.h"
 #include "chad/experimental/terminal.h"
+#include "chad/experimental/change_directory.h"
 #include "chad/dictate.h"
 #include "chad/qx.h"
 #include "chad/terry.h"
