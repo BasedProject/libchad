@@ -17,7 +17,6 @@ endif
 ifneq (${DEBUG},1)
 endif
 
-
 vpath %.c extern
 vpath %.c chad
 vpath %.c chad/experimental
