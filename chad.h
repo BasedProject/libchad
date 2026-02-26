@@ -3,6 +3,7 @@
 // internal code
 #include "chad/experimental/timespec.h"
 #include "chad/experimental/bits.h"
+#include "chad/experimental/ro.h"
 #include "chad/experimental/terminal.h"
 #include "chad/experimental/change_directory.h"
 #include "chad/dictate.h"
