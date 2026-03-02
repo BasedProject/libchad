@@ -11,9 +11,23 @@
 #include "chad/terry.h"
 
 // external code
+#include "chad/random/random.h"
 #include "chad/sds.h"
 #include "chad/kvec.h"
 #include "chad/klist.h"
+#include "chad/hvec.h"
+#include "chad/hlist.h"
 #include "chad/remove_all.h"
+
+#include "chad/strlist.h"
+#include "chad/slurp.h"
+
+#include "chad/remove_all.h"
+#include "chad/qx.h"
+#include "chad/narg.h"
+#include "chad/memory-units.h"
+#include "chad/ini_file.h"
+#include "chad/dictate.h"
+
 
 #endif

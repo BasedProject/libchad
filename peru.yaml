@@ -1,11 +1,13 @@
 imports:
-    dictate:    extern/
-    qx:         extern/
-    remove_all: extern/
-    sds:        extern/
-    strlist:    extern/
-    slurp:      extern/
-    kvec:       extern/experimental/
+    dictate:    library/dictate
+    qx:         library/qx
+    remove_all: library/remove_all
+    sds:        library/sds
+    strlist:    library/strlist
+    slurp:      library/slurp
+    kvec:       library/kvec
+    libini:     library/libini
+    librandom:  library/librandom
 
 git module dictate:
     url: https://github.com/agvxov/dictate.git
@@ -42,3 +44,12 @@ git module slurp:
     url: https://github.com/agvxov/slurp.git
     pick: slurp.h
     rev: a1cd0aa0767dd5e407f75e312b71a2e54e05ed13
+
+git module libini:
+    url: https://github.com/BasedProject/libini.git
+    pick: [ini_file.c, ini_file.h]
+    rev: 17693cdfabafd71954721ab7a7c060efe2f08d91
+
+git module librandom:
+    url: https://github.com/BasedProject/librandom.git
+    rev: 43e84733af5c93d3f8c4dc5a6dbc5fc7b2ec4b3e
