@@ -10,8 +10,7 @@
 /* -- ESPECIALLY the generics and the from group */
 
 /* macro should be a macro */
-#define TIMESPEC_HZ TIMESPEC_HZ
-static long TIMESPEC_HZ = 1000000000L;
+#define TIMESPEC_HZ ((long) 1000000000L)
 
 typedef struct timespec timespec_t;
 

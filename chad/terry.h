@@ -6,12 +6,11 @@
    Primitivie types:
    signed int : i8>i128, s8>s128
    unsigned int : u8>u128
-   float  : f, f32
-   double : fl, f64
-   long double : fll, f128
+   float  : f32
+   double : f64
+   long double : f128
 
    NO_128_TYPES will be defined when i128, s128, u128 are absent.
-   NO_F_TYPE_NAME will remove hazardous declarations of f, fl, and fll.
 
    All floating bitmarked types will have F<NUM>_PRECISE defined
    if they are specified to that precise number of bits.
@@ -35,7 +34,6 @@
 #define LONG_DOUBLE_IS_F80
 #define LONG_DOUBLE_IS_F128
 #define NO_128_TYPES                /* removes 128 declarations */
-#define NO_F_TYPE_NAME 		    /* removes hazardous f, fl, fll */
 #endif
 
 /* --- */
@@ -56,12 +54,6 @@ typedef uint8_t  u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
-
-#ifndef NO_F_TYPE_NAME
-typedef float  f;
-typedef double fl;
-typedef long double fll;
-#endif
 
 #ifndef NO_128_TYPES
 # if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202000L && defined(__GNUC__) && !defined(__clang__)) \

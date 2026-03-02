@@ -9,6 +9,7 @@
 int change_directory(const char * filename) {
   struct stat statistics;
   char path[PATH_MAX];
+  if (!filename) { return -1; }
   strncpy(path, filename, PATH_MAX-1);
 
   if (stat(path, &statistics)) { return -1; }

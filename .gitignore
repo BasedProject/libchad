@@ -1,6 +1,2 @@
 *.out
-*.so
-.peru/
-extern/
-object/
-*.pyz
+.peru
