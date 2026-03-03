@@ -11,14 +11,15 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
+#define slurp read_file
+
 static char * read_file(const char * const path);
 static inline int write_file(const char * const path, const char * const s);
 static inline int overwrite_file(const char * const path, const char * const s);
 static inline int append_file(const char * const path, const char * const s);
 static inline int prepend_file(const char * const path, const char * const s);
 
-#define slurp read_file
-
+#ifdef SLURP_IMPLEMENTATION
 static
 char * read_file(const char * const path) {
     char * r = NULL;
@@ -125,5 +126,7 @@ int prepend_file(const char * const path, const char * const s) {
 
     return 0;
 }
+
+#endif /* SLURP_IMPLEMENTATION */
 
 #endif

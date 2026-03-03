@@ -36,14 +36,14 @@ git module sds:
     rev: a7752dc1f1cb5550b88f15d441920de0f4841509
 
 git module strlist:
-    url: https://github.com/agvxov/strlist.git
+    url: https://github.com/BasedProject/strlist.git
     pick: strlist.h
-    rev: f51a214aebd7a8be6593b3a23d3038c596407537
+    rev: c0665d4b70127dea712126ffd31453b545ec6bab
 
 git module slurp:
-    url: https://github.com/agvxov/slurp.git
+    url: https://github.com/BasedProject/slurp.git
     pick: slurp.h
-    rev: a1cd0aa0767dd5e407f75e312b71a2e54e05ed13
+    rev: a1a318f4a385800d306626631cf343572de708e7
 
 git module libini:
     url: https://github.com/BasedProject/libini.git
