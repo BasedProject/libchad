@@ -13,14 +13,14 @@
 
 #define slurp read_file
 
-static char * read_file(const char * const path);
-static inline int write_file(const char * const path, const char * const s);
-static inline int overwrite_file(const char * const path, const char * const s);
-static inline int append_file(const char * const path, const char * const s);
-static inline int prepend_file(const char * const path, const char * const s);
+char * read_file(const char * const path);
+int write_file(const char * const path, const char * const s);
+int overwrite_file(const char * const path, const char * const s);
+int append_file(const char * const path, const char * const s);
+int prepend_file(const char * const path, const char * const s);
 
 #ifdef SLURP_IMPLEMENTATION
-static
+
 char * read_file(const char * const path) {
     char * r = NULL;
 
@@ -78,7 +78,6 @@ char * read_file(const char * const path) {
     return r;
 }
 
-static
 int proto_write_file(const char * const path, const char * const s, const int flags) {
     const size_t len = strlen(s);
 
@@ -102,22 +101,18 @@ int proto_write_file(const char * const path, const char * const s, const int fl
     return 0;
 }
 
-static inline
 int write_file(const char * const path, const char * const s) {
     return proto_write_file(path, s, O_WRONLY | O_CREAT | O_EXCL);
 }
 
-static inline
 int overwrite_file(const char * const path, const char * const s) {
     return proto_write_file(path, s, O_WRONLY | O_CREAT | O_TRUNC);
 }
 
-static inline
 int append_file(const char * const path, const char * const s) {
     return proto_write_file(path, s, O_WRONLY | O_CREAT | O_APPEND);
 }
 
-static inline
 int prepend_file(const char * const path, const char * const s) {
     char * const saved_contents = read_file(path);
     if (overwrite_file(path, s)) { return 1; }

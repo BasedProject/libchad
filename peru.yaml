@@ -43,7 +43,7 @@ git module strlist:
 git module slurp:
     url: https://github.com/BasedProject/slurp.git
     pick: slurp.h
-    rev: a1a318f4a385800d306626631cf343572de708e7
+    rev: d6c9b09b758625d83b7546c25fbf088c8b4abf35
 
 git module libini:
     url: https://github.com/BasedProject/libini.git
