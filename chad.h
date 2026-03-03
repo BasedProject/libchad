@@ -15,8 +15,10 @@
 #include "chad/sds.h"
 #include "chad/kvec.h"
 #include "chad/klist.h"
-#include "chad/hvec.h"
-#include "chad/hlist.h"
+/* mega broken, plz fork */
+/* c23 stuff and <these-fucking-things.h> */
+/* #include "chad/hvec.h" */
+/* #include "chad/hlist.h" */
 #include "chad/remove_all.h"
 
 #include "chad/strlist.h"
