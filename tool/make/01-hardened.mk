@@ -5,8 +5,11 @@ ifneq (${DEBUG},1)
                 CFLAGS   += -fstack-clash-protection
                 CXXFLAGS += -fstack-clash-protection
                 ifeq (${IS_GCC},1)
-                        CFLAGS   += -fPIE -pie
-                        CXXFLAGS += -fPIE -pie
+                        CFLAGS   += -fPIC -fpic
+                        CXXFLAGS += -fPIC -fpic
+                else
+                        CFLAGS   += -fPIC
+                        CXXFLAGS += -fPIC
                 endif
                 LDFLAGS  += -Wl,-z,relro,-z,now
         endif
