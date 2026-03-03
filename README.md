@@ -146,6 +146,11 @@ and a clean-cut predicate to choose between items of similar subjects.
     #   slugify
     #   reverse
     #   case conversions
+    #
+    # XXX
+    #  conventionally XXX is used emphasize comments
+    #  sometimes that means a todo, that is how i always use it too
+    #  it could be defined as the "no implemented" function, anaogous to perl's ...
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
