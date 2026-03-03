@@ -10,11 +10,11 @@ endif
 ifneq (${DEBUG},0)
         LFLAGS   += --debug --trace
         YFLAGS   += --debug
-        # there's gcc15 -flto-incremental
+        # there's gcc15 -incremental
         # for clang see https://clang.llvm.org/docs/ThinLTO.html
         ifeq (${IS_CLANG},1)
-                CFLAGS   += -flto=thin -glldb
-                CXXFLAGS += -flto=thin -glldb
+                CFLAGS   += -glldb
+                CXXFLAGS += -glldb
         else
                 ifeq (${IS_GCC},1)
                         CFLAGS   += -pg -ggdb
@@ -27,13 +27,6 @@ ifneq (${DEBUG},0)
         CFLAGS   += -fno-inline -Wall -Wextra -Wpedantic -Wshadow -Wundef -fno-omit-frame-pointer
         CXXFLAGS += -fno-inline -Wall -Wextra -Wpedantic -Wshadow -Wundef -fno-omit-frame-pointer
 else
-        ifeq (${IS_GCC},1)
-                CFLAGS += -flto=auto
-                CXXFLAGS += -flto=auto
-        else
-                CFLAGS   += -flto
-                CXXFLAGS += -flto
-        endif
         CFLAGS   += -ftree-vectorize -march=x86-64 -mtune=generic
         CXXFLAGS += -ftree-vectorize -march=x86-64 -mtune=generic
         CPPFLAGS += -DNDEBUG
