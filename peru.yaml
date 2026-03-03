@@ -52,4 +52,4 @@ git module libini:
 
 git module librandom:
     url: https://github.com/BasedProject/librandom.git
-    rev: 43e84733af5c93d3f8c4dc5a6dbc5fc7b2ec4b3e
+    rev: 79fff0ea8001e2594b6df171d13a4b67fd74ab99
