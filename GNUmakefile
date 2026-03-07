@@ -10,9 +10,8 @@ CPPFLAGS := -I. -Ichad -D_XOPEN_SOURCE=500 -D_GNU_SOURCE -fPIC
 LDFLAGS  := -lm
 
 SOURCE.dir := chad
-OBJECT.dir := object
+OBJECT.dir := object/source
 LIBRARY.dir := library
-
 MAKE.dir := tool/make
 MAKE.filter := 11-pch.mk
 

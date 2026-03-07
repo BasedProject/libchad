@@ -1,3 +1,20 @@
+HELP_ME += \
+"01-debug.mk\n" \
+"Provides DEBUG, when nonzero will provide debugging information.\n" \
+"Provides SANITIZE, when nonzero will provide -fsantize maximally for relavant compiler.\n" \
+"Note that SANITIZE isn't trying to cover all possible usages of -fsan, just the most generally useful.\n" \
+"Provides VECTORIZED_ALL, when nonzero will provide complete debugging information about automatic vectorization\n" \
+"Provides VECTORIZED, when nonzero will provide partial (success-only) about automatic vectorization.\n" \
+"Override in command line, in GNUmakefile or inline as needbe.\n" \
+"Note that GCC has better output regarding automatic vectorization.\n" \
+"Adds lots of flags for CFLAGS, CPPFLAGS, CXXFLAGS, LFLAGS, YFLAGS, which should be read in source.\n" \
+"In summary, we try to fast by default, and provide real, generally speedy debugging otherwise.\n" \
+"You should alraedy know about NDEBUG in C, which is provided correctly.\n" \
+"Compiler's respective debugger is respected automatically.\n" \
+"This is not comprehensive, overwrite or write your own if you need that.\n" \
+"provides DO_LTO, which is automatically disabled for libraries.\n" \
+"\n"
+
 DEBUG          ?= 0
 SANITIZE       ?= 0
 VECTORIZED_ALL ?= 0

@@ -1,4 +1,16 @@
-ifeq (${LD},ld)
+HELP_ME += \
+"00-compiler.mk\n" \
+"LD will be automatically set to mold if possible. override LD from ld or set USE_MOLD to 0.\n" \
+"CC will be automatically set to gcc if PREFER_GCC=1 is set. Otherwise Clang, or error.\n" \
+"May be overwritten. If either compiler missing, will default to the other regardless of preference.\n" \
+"Overwritten will always be taken as priority.\n" \
+"CC defines CXX if it is a known good compiler\n" \
+"(EXACTLY gcc or EXACTLY clang, this is not comprehensive or investigative.)\n" \
+"This file provides the state IS_GCC and IS_CLANG, which will both be set accordingly.\n" \
+"\n"
+
+USE_MOLD ?= 1
+ifeq (${LD}${USE_MOLD},ld1)
         ifneq ($(shell which mold 2> /dev/null),)
                 LDFLAGS += -fuse-ld=mold
                 LD := mold
