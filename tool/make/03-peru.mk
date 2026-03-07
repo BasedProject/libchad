@@ -1,6 +1,12 @@
 ALSO += .peru/lastimports .WAIT
 
+HAS_PERU := 0
+ifneq ($(shell which peru 2> /dev/null),)
+        HAS_PERU := 1
+endif
+
 .peru/lastimports: peru.yaml
 	@echo "Peru Syncing..."
-	@peru sync || (echo "BIG WARNING OF DOOM: Your system lacks a functioning peru or something is majorly wrong, we'll ignore that and move on as this repo is unified"; true)
-	@touch $@
+	@peru sync 2>/dev/null ||\
+        (echo "NOTICE:\nYour system lacks <https://github.com/buildinspace/peru>\nPreunified build will continue."; true)
+	@touch $@ 2>/dev/null || true
