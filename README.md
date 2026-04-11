@@ -147,10 +147,14 @@ and a clean-cut predicate to choose between items of similar subjects.
     #   reverse
     #   case conversions
     #
-    # XXX
-    #  conventionally XXX is used emphasize comments
-    #  sometimes that means a todo, that is how i always use it too
-    #  it could be defined as the "no implemented" function, anaogous to perl's ...
+    # raylib math util:
+    #  float Clamp(float value, float min, float max);                             // Clamp float value
+    #  float Lerp(float start, float end, float amount);                           // Calculate linear interpolation between two floats
+    #  float Normalize(float value, float start, float end);                       // Normalize input value within input range
+    #  float Remap(float value, float inputStart, float inputEnd, float outputStart, float outputEnd); // Remap input value within input range to output range
+    #  float Wrap(float value, float min, float max);                              // Wrap input value from min to max
+    #
+    # a slab allocator
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
