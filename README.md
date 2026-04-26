@@ -19,13 +19,25 @@ however compatibility with other UNIX-like operating systems should also be cons
 Compatibility with Windows is NOT a concern.
 
 [^target]: This might be subject to change in the future,
-particularly to BSD when the Linux finally becomes too tightly integrated with cancerware,
+particularly to BSD when Linux finally becomes too tightly integrated with cancerware,
 such as Rust and Systemd.
 
 [^cpp]: This requirement added for practicality.
 It might be subject to change specifically
 if some meta-programming based OOP solution for C
 gains appropriate maturity.
+
+## Criteria
+* A clear way in which the functionality can be described as.
+(e.g.: "generic datastructures" - good; "roguelike stuff" - bad)
+* Clean and simple interface which can be learned under a few minutes.
+Complexity has its place: within its own library.
+* Must be amalgamable into a single header.
+* No project-namespacing.
+* The top of the headers must have a *description comment*.
+* The *description comment* must be followed by declarations.
+* License comments may not take up more than 3 lines (worst case being a title, the license body and the list of people holding the copyright).
+* Each library must come with a `man(1)` compatible manual.
 
 ## Contents
 
@@ -64,28 +76,12 @@ gains appropriate maturity.
 | slurp.h       | Perl  | Simple reading/writing/modifying of complete files. |
 | remove\_all.h | C++   | Remove a directory recursively. |
 
----
 
-## Experimental
-The mainline chad libraries are considered to have a stable API.
-They might get extended, but are not expected to change.
-Experimental libraries on the other hand are volatile.
+### XXX
 
 | Lib    | Description |
 | :---   | :---------- |
 | bits.h | Various miscellaneous functionalities. |
-
-## Criteria
-* A clear way in which the functionality can be described as.
-(e.g.: "generic datastructures" - good; "roguelike stuff" - bad)
-* Clean and simple interface which can be learned under a few minutes.
-Complexity has its place: within its own library.
-* Must be amalgamable into a single header.
-* No project-namespacing.
-* The top of the headers must have a *description comment*.
-* The *description comment* must be followed by declarations.
-* License comments may not take up more than 3 lines (worst case being a title, the license body and the list of people holding the copyright).
-* Each library must come with a `man(1)` compatible manual.
 
 ## Recommendations
 Some subjects are outside of the scope of this project,
@@ -146,6 +142,7 @@ and a clean-cut predicate to choose between items of similar subjects.
     #   slugify
     #   reverse
     #   case conversions
+    #   chomp
     #
     # raylib math util:
     #  float Clamp(float value, float min, float max);                             // Clamp float value
@@ -155,6 +152,12 @@ and a clean-cut predicate to choose between items of similar subjects.
     #  float Wrap(float value, float min, float max);                              // Wrap input value from min to max
     #
     # a slab allocator
+    #
+    # timeouts
+    #
+    # colors (../libcolor/)
+    #
+    # roman numbers
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
