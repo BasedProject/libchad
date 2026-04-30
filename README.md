@@ -158,6 +158,12 @@ and a clean-cut predicate to choose between items of similar subjects.
     # colors (../libcolor/)
     #
     # roman numbers
+    #
+    # the number parsing functions of the standard are shit
+    #   unsigned parsing wraps, because fuck you
+    #   they require null terminated strings
+    #
+    # spinners?
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
