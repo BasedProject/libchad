@@ -1,0 +1,6 @@
+Name: libchad
+Description: The Chad standard library
+Url: https://github.com/BasedProject/libchad
+Version: 0.1
+Libs: -lchad
+Cflags: -std=c23
