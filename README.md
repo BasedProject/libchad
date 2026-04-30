@@ -74,14 +74,17 @@ Complexity has its place: within its own library.
 | :---          | :---: | :---------- |
 | qx.h          | Perl  | Capture output of exec. |
 | slurp.h       | Perl  | Simple reading/writing/modifying of complete files. |
+| XXX.h         | Perl  | Macro to mark unimplemented code. |
 | remove\_all.h | C++   | Remove a directory recursively. |
 
 
 ### XXX
 
-| Lib    | Description |
-| :---   | :---------- |
-| bits.h | Various miscellaneous functionalities. |
+| Lib      | Description |
+| :---     | :---------- |
+| roman.h  | Convert to and from roman numerals. |
+| dyrect.h | Rectangle layout utility box. |
+| bits.h   | Various miscellaneous functionalities. |
 
 ## Recommendations
 Some subjects are outside of the scope of this project,
@@ -164,6 +167,8 @@ and a clean-cut predicate to choose between items of similar subjects.
     #   they require null terminated strings
     #
     # spinners?
+    #
+    # dedent?
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
