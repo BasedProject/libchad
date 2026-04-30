@@ -2,3 +2,5 @@
 *.so
 *.out
 .peru
+tmp-cmdtest-*
+.cmdtest-filter
