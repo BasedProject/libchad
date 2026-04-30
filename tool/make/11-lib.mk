@@ -19,12 +19,11 @@ NOT_APART_OF_LIBRARY := $(NOT_APART_OF_LIBRARY:.C=.o)
 OBJECT.lib := $(filter-out ${NOT_APART_OF_LIBRARY},${OBJECT.orig})
 
 LIBTARGET ?= lib$(basename $(TARGET))
-
-${OBJECT.dir}/${LIBTARGET}.a: ${OBJECT.lib}
+${LIBTARGET}.a: ${OBJECT.lib}
 	$(call quiet_echo,AR	$@)
 	${QUIET}ar rcs -o "$@" $+
 
-${OBJECT.dir}/${LIBTARGET}.so: ${OBJECT.lib}
+${LIBTARGET}.so: ${OBJECT.lib}
 	$(call quiet_echo,SO	$@)
 ifeq (${SOURCE.orig.cxx},)
 	${QUIET}${LINK.c} -shared -o "$@" $+
@@ -32,4 +31,4 @@ else
 	${QUIET}${LINK.cpp} -shared -o "$@" $+
 endif
 
-ALSO += ${OBJECT.dir}/${LIBTARGET}.a ${OBJECT.dir}/${LIBTARGET}.so
+ALSO += ${LIBTARGET}.a ${LIBTARGET}.so

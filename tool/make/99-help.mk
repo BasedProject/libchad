@@ -20,4 +20,4 @@ ${HELP_ME}
 
 .PHONY: help
 help:
-	@echo ${HELP_ME}
+	@echo -e ${HELP_ME}
