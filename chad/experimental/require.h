@@ -36,6 +36,9 @@
  *     Required operation 'fopen("a.txt", "r")' failed.
  */
 
+/* XXX
+ * this is shit because it does not work with structs
+ */
 thread_local long long require_v;
 
 #ifndef REQUIRE_TERMINATOR
@@ -49,6 +52,36 @@ void require_default_terminator(const char * const argv) {
     exit(1);
 }
 
+/* XXX
+ * this is shit because != is restrictive
+ * ultimetly, you would want REQUIRE( thing(x) == 0 ),
+ *  where thing(x) is returned, but thats imposssible
+ *
+ * idea, which is worse than plain if (!r) { return; }
+ *     int i;
+ *     REQUIRE(
+ *         (i = thing(x))
+ *          == 0
+ *     );
+ *
+ * -- alternative
+ *     int i;
+ *     REQUIRE_EX( == 0,
+ *         i = thing(x)
+ *     );
+ *     
+ *     REQUIRE_TRUE(
+ *         thung(x)
+ *     );
+ *     
+ *     REQUIRE_POINTER(
+ *         k = malloc(10)
+ *     );
+ * -- maybe abandon this mind cancer and generate require_* variants?
+ * REQUIRE_POINTER(malloc)
+ * // ...
+ * k = required_malloc(10);
+ */
 #define REQUIRE_EX(errval, ...) (typeof(__VA_ARGS__))( \
     (typeof(__VA_ARGS__))(require_v = (long long)(__VA_ARGS__)) != (typeof(__VA_ARGS__))errval \
     ? require_v \
