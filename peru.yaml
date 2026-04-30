@@ -1,13 +1,17 @@
 imports:
     dictate:    library/dictate
-    qx:         library/qx
-    remove_all: library/remove_all
-    sds:        library/sds
-    strlist:    library/strlist
-    slurp:      library/slurp
+    dyrect:     library/dyrect
     kvec:       library/kvec
     libini:     library/libini
     librandom:  library/librandom
+    plumblism:  library/plumblism
+    qx:         library/qx
+    remove_all: library/remove_all
+    roman:      library/roman
+    sds:        library/sds
+    slurp:      library/slurp
+    strlist:    library/strlist
+    xxx:        library/XXX
 
 git module dictate:
     url: https://github.com/agvxov/dictate.git
@@ -23,7 +27,7 @@ git module kvec:
 git module qx:
     url: https://github.com/agvxov/qx.git
     pick: qx.h
-    rev: 48d26ca90e2c5f146ebca8e6aa538897e27e7cd7
+    rev: 9c3562de136ab3ca860355f92f97b0afb23cca89
 
 git module remove_all:
     url: https://github.com/agvxov/remove_all.git
@@ -43,7 +47,7 @@ git module strlist:
 git module slurp:
     url: https://github.com/BasedProject/slurp.git
     pick: slurp.h
-    rev: d6c9b09b758625d83b7546c25fbf088c8b4abf35
+    rev: 09bc49b32c7e2ed1933e1e2d7c62563571cb4002
 
 git module libini:
     url: https://github.com/BasedProject/libini.git
@@ -53,3 +57,19 @@ git module libini:
 git module librandom:
     url: https://github.com/BasedProject/librandom.git
     rev: 79fff0ea8001e2594b6df171d13a4b67fd74ab99
+
+git module plumblism:
+    url: https://github.com/agvxov/plumblism.git
+    rev: 3bf6247824563f00e944b3736a859c4e1ed2cecf
+
+git module xxx:
+    url: https://github.com/agvxov/XXX-h.git
+    rev: 435a7b56995c1c6452be4cd7e5210d45bb7b807c
+
+git module roman:
+    url: https://github.com/agvxov/roman-h.git
+    rev: 7c1b314cc2c0aba671cd3d06c2eff546f11e0d90
+
+git module dyrect:
+    url: https://github.com/agvxov/dyrect.git
+    rev: bdda3e7dc60e4687fa3acb6641c0e498fc9232f3
