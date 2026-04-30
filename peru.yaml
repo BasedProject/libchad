@@ -60,6 +60,8 @@ git module librandom:
 
 git module plumblism:
     url: https://github.com/agvxov/plumblism.git
+    export: source/
+    pick:   source/
     rev: 3bf6247824563f00e944b3736a859c4e1ed2cecf
 
 git module xxx:

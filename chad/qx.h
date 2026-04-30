@@ -19,7 +19,7 @@ extern char * qx(const char * const cmd);
  * The command argument is a pointer to a null-terminated
  * string containing a shell command line.
  * This command is passed to `/bin/sh` using the `-c` flag; interpretation,
- * if  any,  is  performed by the shell.
+ * if any, is performed by the shell.
  *
  * ## RETURN VALUE
  * Upon successful return, the captured `stdout` and `stderr` of `cmd` is returned

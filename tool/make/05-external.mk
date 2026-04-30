@@ -1,6 +1,17 @@
-LIBRARY.orig := dictate/dictate.c dictate/dictate.h qx/qx.h \
-                remove_all/remove_all.h sds/sds.c sds/sds.h sds/sdsalloc.h \
-                strlist/strlist.h slurp/slurp.h libini/ini_file.c libini/ini_file.h
+LIBRARY.orig := dictate/dictate.c \
+                dictate/dictate.h \
+                qx/qx.h \
+                remove_all/remove_all.h \
+                sds/sds.c \
+                sds/sds.h \
+                sds/sdsalloc.h \
+                strlist/strlist.h \
+                slurp/slurp.h \
+                libini/ini_file.c \
+                libini/ini_file.h \
+                plumblism/plumblism.h \
+                plumblism/plumblism.c
+
 LIBRARY.experimental := kvec/hvec.h kvec/hlist.h
 LIBRARY.install := $(addprefix ${SOURCE.dir}/,$(notdir ${LIBRARY.orig})) $(addprefix ${SOURCE.dir}/experimental/,$(notdir ${LIBRARY.experimental}))
 

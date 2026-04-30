@@ -31,7 +31,7 @@ char * read_file(const char * const path) {
     if (fstat(fd, &stat_buf) == -1) { return r; }
 
     if (stat_buf.st_size > 0 && S_ISREG (stat_buf.st_mode)) {
-        const auto len = stat_buf.st_size;
+        const off_t len = stat_buf.st_size;
         r = malloc(len + 1);
         if (!r) { return r; }
 
@@ -79,7 +79,7 @@ char * read_file(const char * const path) {
 }
 
 int proto_write_file(const char * const path, const char * const s, const int flags) {
-    const size_t len = strlen(s);
+    const ssize_t len = strlen(s);
 
     int fd = open(path, flags, 0644);
     if (fd == -1) { return 1; }
