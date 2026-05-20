@@ -1,16 +1,20 @@
 #ifndef RANDOM_MT19937_H
 #define RANDOM_MT19937_H
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
 #define MT19937_N 624
 
 typedef struct {
-    uint32_t mt[MT19937_N];
+    u32 mt[MT19937_N];
     int index;
-} random_mt19937_t;
+} mt19937_t;
 
-random_mt19937_t random_mt19937_init(uint32_t initial);
-uint32_t random_mt1993732(random_mt19937_t * randomp);
+mt19937_t RANDOM_PREFIX(mt19937_init_raw)(u32 init);
+u32 RANDOM_PREFIX(mt19937_next)(mt19937_t * randomp);
+
+#define X mt19937
+#include "implements.h"
 
 #endif /* RANDOM_MT19937_H */

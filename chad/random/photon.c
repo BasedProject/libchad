@@ -1,30 +1,30 @@
 /* https://mit-license.org/ - Copyright 2025 wallstop */
 #include "photon.h"
-#include "ro.h"
+#include "rotate.h"
 
 static
-uint32_t mix32(uint64_t * mix) {
+u32 mix32(u64 * mix) {
   *mix = (*mix ^ (*mix >> 33)) * 0xFF51AFD7ED558CCDULL;
   *mix = (*mix ^ (*mix >> 33)) * 0xC4CEB9FE1A85EC53ULL;
   *mix ^= (*mix >> 33);
-  uint32_t result = (uint32_t)(*mix >> 32);
+  u32 result = (u32)(*mix >> 32);
   *mix += 0x9E3779B97F4A7C15ULL;
   return result;
 }
 
 static inline
-void normalize_index(random_photon_t * randomp) {
-  if (randomp->index < 0 || randomp->index > RANDOM_PHOTON_BLOCK_SIZE) {
-    randomp->index = RANDOM_PHOTON_BLOCK_SIZE;
+void normalize_index(photon_t * randomp) {
+  if (randomp->index < 0 || randomp->index > PHOTON_BLOCK_SIZE) {
+    randomp->index = PHOTON_BLOCK_SIZE;
   }
 }
 
-random_photon_t random_photon_init(uint64_t init_a, uint64_t init_b) {
-  random_photon_t photon = {0};
+photon_t RANDOM_PREFIX(photon_init_raw)(u128 init) {
+  photon_t photon = {0};
 
-  uint64_t mix = init_a ^ (init_b << 1) ^ 0x9E3779B97F4A7C15ULL;
+  u64 mix = ((u64)init) ^ ((u64)(init >> 64) << 1) ^ 0x9E3779B97F4A7C15ULL;
 
-  for (int i = 0; i < RANDOM_PHOTON_BLOCK_SIZE; ++i) {
+  for (int i = 0; i < PHOTON_BLOCK_SIZE; ++i) {
     photon.elements[i] = mix32(&mix);
   }
 
@@ -32,7 +32,7 @@ random_photon_t random_photon_init(uint64_t init_a, uint64_t init_b) {
   photon.b = mix32(&mix);
   photon.c = mix32(&mix);
 
-  photon.index = RANDOM_PHOTON_BLOCK_SIZE;
+  photon.index = PHOTON_BLOCK_SIZE;
   photon.has_primed = 0;
   normalize_index(&photon);
 
@@ -40,8 +40,8 @@ random_photon_t random_photon_init(uint64_t init_a, uint64_t init_b) {
 }
 
 static
-void generate_block(random_photon_t * randomp) {
-  uint32_t mix[4];
+void generate_block(photon_t * randomp) {
+  u32 mix[4];
   int base_index = (int)(randomp->a & 15U);
 
   mix[0] = randomp->elements[base_index];
@@ -49,7 +49,7 @@ void generate_block(random_photon_t * randomp) {
   mix[2] = randomp->elements[(base_index + 6) & 15];
   mix[3] = randomp->elements[(base_index + 9) & 15];
 
-  randomp->a += RANDOM_PHOTON_SPIN_INCREMENT;
+  randomp->a += PHOTON_SPIN_INCREMENT;
 
   int k = 0, i, j;
   for (i = 0; i < 4; ++i) {
@@ -83,18 +83,18 @@ void generate_block(random_photon_t * randomp) {
   randomp->index = 0;
 }
 
-uint32_t random_photon32(random_photon_t * randomp) {
+u32 RANDOM_PREFIX(photon_next)(photon_t * randomp) {
   if (!randomp->has_primed) {
     generate_block(randomp);
     randomp->has_primed = 1;
-    randomp->index = RANDOM_PHOTON_BLOCK_SIZE;
+    randomp->index = PHOTON_BLOCK_SIZE;
   }
 
-  if (randomp->index >= RANDOM_PHOTON_BLOCK_SIZE) {
+  if (randomp->index >= PHOTON_BLOCK_SIZE) {
     generate_block(randomp);
   }
 
-  uint32_t value = randomp->elements[randomp->index];
+  u32 value = randomp->elements[randomp->index];
   ++randomp->index;
   return value;
 }

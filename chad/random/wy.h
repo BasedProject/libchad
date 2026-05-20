@@ -1,12 +1,16 @@
 #ifndef RANDOM_WY_H_
 #define RANDOM_WY_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
-typedef uint64_t random_wy_t;
+typedef u64 wy_t;
 
-random_wy_t random_wy_init(uint32_t init);
-uint32_t random_wy32(random_wy_t * randomp);
-uint64_t random_wy64(random_wy_t * randomp);
+wy_t RANDOM_PREFIX(wy_init_raw)(u64 init);
+u64 RANDOM_PREFIX(wy_next)(wy_t * randomp);
+
+#define X wy
+#define X_NEXT_WIDTH 64
+#include "implements.h"
 
 #endif /* RANDOM_WY_H_ */

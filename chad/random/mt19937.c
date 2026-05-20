@@ -54,7 +54,7 @@
 #define MT19937_F 1812433253U
 
 static inline
-void twist(random_mt19937_t * randomp) {
+void twist(mt19937_t * randomp) {
     for (int i = 0; i < MT19937_N; i++) {
         uint32_t y = (randomp->mt[i] & MT19937_UPPER_MASK) |
                      (randomp->mt[(i + 1) % MT19937_N] & MT19937_LOWER_MASK);
@@ -66,20 +66,21 @@ void twist(random_mt19937_t * randomp) {
     randomp->index = 0;
 }
 
-random_mt19937_t random_mt19937_init(uint32_t initial) {
-    random_mt19937_t mt19937;
-    mt19937.mt[0] = initial;
-    for (int i = 1; i < MT19937_N; i++) {
-        mt19937.mt[i] = MT19937_F * (mt19937.mt[i-1] ^ (mt19937.mt[i-1] >> 30)) + i;
-    }
-    mt19937.index = MT19937_N;
-    return mt19937;
+mt19937_t RANDOM_PREFIX(mt19937_init_raw)(u32 init) {
+  mt19937_t mt19937;
+  mt19937.mt[0] = init;
+  for (int i = 1; i < MT19937_N; i++) {
+    mt19937.mt[i] = MT19937_F * (mt19937.mt[i-1] ^ (mt19937.mt[i-1] >> 30)) + i;
+  }
+  mt19937.index = MT19937_N;
+  return mt19937;
 }
 
-uint32_t random_mt1993732(random_mt19937_t * randomp) {
+u32 RANDOM_PREFIX(mt19937_next)(mt19937_t * randomp) {
     if (randomp->index >= MT19937_N) {
         if (randomp->index > MT19937_N) {
-            *randomp = random_mt19937_init(5489U);
+          const unsigned int u = 5489U;
+          *randomp = mt19937_init( (const char *) &u, sizeof (u));
         }
         twist(randomp);
     }

@@ -1,11 +1,15 @@
 #ifndef RANDOM_ROMUDUO_H_
 #define RANDOM_ROMUDUO_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
-typedef struct { uint64_t a, b; } random_romuduo_t;
+typedef u128 romuduo_t;
 
-random_romuduo_t random_romuduo_init(uint64_t init_a, uint64_t init_b);
-uint32_t random_romuduo32(random_romuduo_t * randomp);
+romuduo_t RANDOM_PREFIX(romuduo_init_raw)(u128 init);
+u32 RANDOM_PREFIX(romuduo_next)(romuduo_t * randomp);
+
+#define X romuduo
+#include "implements.h"
 
 #endif /* RANDOM_ROMUDUO_H_ */

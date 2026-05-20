@@ -1,16 +1,25 @@
 #ifndef RANDOM_PCG_H_
 #define RANDOM_PCG_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
 typedef struct {
-  uint64_t a, b;
-} random_pcg_t;
+  u64 a, b;
+} pcg_t;
 
-/* recommended for increment */
+/* recommended for pcg_t.b prime increment */
 #define RANDOM_PCG_PRIME ((uint64_t)6554638469)
 
-random_pcg_t random_pcg_init(uint64_t init, uint64_t increment);
-uint32_t random_pcg32(random_pcg_t * randomp);
+/* nongeneric interface */
+pcg_t RANDOM_PREFIX(pcg_init)(const char * buffer, size_t length);
+/* --- */
+pcg_t RANDOM_PREFIX(pcg_init_raw)(u64 init, u64 increment);
+u32 RANDOM_PREFIX(pcg_next)(pcg_t * randomp);
+
+/* uses the above for increment... */
+#define X pcg
+#define X_PROVES_RULES           /* due to init_raw not being uN */
+#include "implements.h"
 
 #endif /* RANDOM_PCG_H_ */

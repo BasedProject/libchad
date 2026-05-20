@@ -1,11 +1,15 @@
 #ifndef RANDOM_LCG_H_
 #define RANDOM_LCG_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
-typedef uint32_t random_lcg_t;
+typedef u32 lcg_t;
 
-random_lcg_t random_lcg_init(uint32_t init);
-uint32_t random_lcg32(random_lcg_t * randomp);
+u32 RANDOM_PREFIX(lcg_next)(lcg_t * randomp);
+lcg_t RANDOM_PREFIX(lcg_init_raw)(u32 init);
+
+#define X lcg
+#include "implements.h"
 
 #endif /* RANDOM_LCG_H_ */

@@ -1,12 +1,15 @@
 #ifndef RANDOM_XORSHIFT_H_
 #define RANDOM_XORSHIFT_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
-typedef uint32_t random_xorshift_t;
+typedef u32 xorshift_t;
 
-/* random_xorshift32_t xorrand32[1] = {xorshift32_init(initial)}; */
-random_xorshift_t random_xorshift_init(uint32_t init);
-uint32_t random_xorshift32(random_xorshift_t * randomp);
+u32 RANDOM_PREFIX(xorshift_next)(xorshift_t * randomp);
+xorshift_t RANDOM_PREFIX(xorshift_init_raw)(u32 init);
+
+#define X xorshift
+#include "implements.h"
 
 #endif /* RANDOM_XORSHIFT_H_ */
