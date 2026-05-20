@@ -3,14 +3,37 @@
 
 ---
 
-## Rationele
+## Rationale
 C libraries are hard to find; good libraries are even harder.
+
 Libchad is a collection of quality, general-purpose, high-level libraries
 aimed at modern C development.
 
+## Install
+
+```sh
+PREFIX=/usr make install
+```
+
+This will provide you with <terry.h> (for fundamental basic types)
+and <chad/...> (which is for everything else.)
+
+## Status
+
+This library is not complete, but that does not mean it is not ready for usage.
+
+You are free to package this into whatever you wish under the terms of SPDX:MPL-2.0.
+Note that some subware here may have more permissive licensing, such as Public Domain or MIT.
+
+You can assume that all source here is at least under MPL-2.0:
+* If you distribute modified versions of the library, you are required to make the modified source available.
+* You may link this software statically without affecting the license of your own code.
+* You must include a copy of the MPL-2.0 license.
+
 ## Compatibility
-Libchad is standard C23.
-Individual components might be compatible with older standards.
+Libchad will only support C23.
+Individual components might be compatible with older standards,
+though this is not expected and not wanted.
 
 Headers must compile under C++17[^cpp].
 
@@ -18,25 +41,29 @@ Linux is the primary target OS[^target],
 however compatibility with other UNIX-like operating systems should also be considered.
 Compatibility with Windows is NOT a concern.
 
-[^target]: This might be subject to change in the future,
-particularly to BSD when Linux finally becomes too tightly integrated with cancerware,
-such as Rust and Systemd.
+[^target]: This will likely remain Linux for a long time.
+Windows support is actively NOT SUPPORTED.
+BSD will, at somepoint, be supported and may be become the fundamental of this library.
+MacOS would be reasonable under conditions of minor changes only.
 
 [^cpp]: This requirement added for practicality.
-It might be subject to change specifically
-if some meta-programming based OOP solution for C
-gains appropriate maturity.
+It might be subject to change specifically if some meta-programming based OOP solution for C gains appropriate maturity.
+Support for this may be shakey and is not tested at this instant.
 
 ## Criteria
-* A clear way in which the functionality can be described as.
-(e.g.: "generic datastructures" - good; "roguelike stuff" - bad)
-* Clean and simple interface which can be learned under a few minutes.
-Complexity has its place: within its own library.
+
+Strong requirements:
+* A clear, general purpose. (e.g.: "generic datastructures" - good; "roguelike stuff" - bad)
+* Clean and simple interface which can be learned under a few minutes. Complexity has its place: within its own library.
+* No inlined project-namespacing.
+* Code must be licensed under weak copyleft (ensures librarying in any software is permitted) or permissive.
+
+Longterm, less important requirements:
 * Must be amalgamable into a single header.
-* No project-namespacing.
-* The top of the headers must have a *description comment*.
-* The *description comment* must be followed by declarations.
-* License comments may not take up more than 3 lines (worst case being a title, the license body and the list of people holding the copyright).
+* Useful comment data:
+- Individual headers must have a *description comment*.
+- The *description comment* must be followed by declarations.
+* Licenses must use their SPDX License Identifiers (e.g.: SPDX:GPL-3.0-or-later).
 * Each library must come with a `man(1)` compatible manual.
 
 ## Contents
@@ -56,35 +83,36 @@ Complexity has its place: within its own library.
 
 | Lib       | Description |
 | :---      | :---------- |
-| sds.h     | Dynamic strings. |
-| haste.h   | Type-safe generic containers optimized single threaded speed. |
-| strlist.h | String lists. |
+| chad/haste.h   | Type-safe generic containers optimized single threaded speed. |
+| chad/sds.h     | Dynamic strings. |
+| chad/strlist.h | String lists. |
+| chad/terry.h & terry.h | Fundamental. |
 
 ### Memory
 
 | Lib            | Description |
 | :---           | :---------- |
-| memory-units.h | Memory unit macros. |
-| zone.h         | Zone allocator. |
+| chad/memory-units.h | Memory unit macros. |
+| chad/zone.h         | Zone allocator. |
 // arena allocator
 
 ### Ported functionality
 
 | Lib           | Lang  | Description |
 | :---          | :---: | :---------- |
-| qx.h          | Perl  | Capture output of exec. |
-| slurp.h       | Perl  | Simple reading/writing/modifying of complete files. |
-| XXX.h         | Perl  | Macro to mark unimplemented code. |
-| remove\_all.h | C++   | Remove a directory recursively. |
-
+| chad/XXX.h         | Perl  | Macro to mark unimplemented code. |
+| chad/qx.h          | Perl  | Capture output of exec. |
+| chad/remove\_all.h | C++   | Remove a directory recursively. |
+| chad/slurp.h       | Perl  | Simple reading/writing/modifying of complete files. |
 
 ### XXX
 
 | Lib      | Description |
 | :---     | :---------- |
-| roman.h  | Convert to and from roman numerals. |
-| dyrect.h | Rectangle layout utility box. |
-| bits.h   | Various miscellaneous functionalities. |
+| chad/bits.h   | Various miscellaneous functionalities. |
+| chad/dyrect.h | Rectangle layout utility box. |
+| chad/random/random.h | Provides various randomizers, see <https://github.com/Basedproject/librandom> for details. |
+| chad/roman.h  | Convert to and from roman numerals. |
 
 ## Recommendations
 Some subjects are outside of the scope of this project,
@@ -100,7 +128,12 @@ and a clean-cut predicate to choose between items of similar subjects.
 | XXX | XXX | XXX |
 
 ## Todo
-* peru is nice as a concept, but 1) depends on py-yaml, 2) yaml makes make me vomit from my eyes
+* peru is FINE as is. Could be improved but there's no need. Peru is not explicitly required in the build.
+* SO MUCH SHIT IS MISSING FROM THE LIBRARY WHAT THE HELL
+- /* #include "chad/XXX.h" */
+- /* #include "chad/dyrect.h" */
+- /* #include "chad/roman.h" */
+- experimental/ro.h should be destroyed from space
 * code
 ```sh
     file filesystem.h {
