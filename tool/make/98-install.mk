@@ -12,3 +12,4 @@ install: chad | ${LIBTARGET}.a ${LIBTARGET}.so
 	cp -f chad.h ${DESTDIR}${PREFIX}/include
 	cp -rf $^ ${DESTDIR}${PREFIX}/include
 	cp -f $| ${DESTDIR}${PREFIX}/lib
+	ldconfig
