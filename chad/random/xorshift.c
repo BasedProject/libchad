@@ -1,17 +1,17 @@
 /* https://mit-license.org/ - Copyright 2025 wallstop */
 #include "xorshift.h"
 
-static inline random_xorshift_t random_xorshift_normalize(random_xorshift_t random) {
+static inline xorshift_t xorshift_normalize(xorshift_t random) {
   return random == 0 ? 2463534242 : random;
 }
 
-random_xorshift_t random_xorshift_init(uint32_t init) {
-  return random_xorshift_normalize(init);
+xorshift_t RANDOM_PREFIX(xorshift_init_raw)(u32 init) {
+  return xorshift_normalize((xorshift_t) init);
 }
 
-uint32_t random_xorshift32(random_xorshift_t * randomp) {
-  random_xorshift_t random = *randomp;
-  random    = random_xorshift_normalize(random);
+u32 RANDOM_PREFIX(xorshift_next)(xorshift_t * randomp) {
+  xorshift_t random = *randomp;
+  random    = xorshift_normalize(random);
   random   ^= random << 13;
   random   ^= random >> 17;
   random   ^= random << 5;

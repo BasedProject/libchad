@@ -1,26 +1,30 @@
 #ifndef RANDOM_PHOTON_H_
 #define RANDOM_PHOTON_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
-#ifndef RANDOM_PHOTON_BLOCK_SIZE
-#define RANDOM_PHOTON_BLOCK_SIZE 20
+#ifndef PHOTON_BLOCK_SIZE
+#define PHOTON_BLOCK_SIZE 20
 #endif
 
-#ifndef RANDOM_PHOTON_SPIN_INCREMENT
-#define RANDOM_PHOTON_SPIN_INCREMENT 111111U
+#ifndef PHOTON_SPIN_INCREMENT
+#define PHOTON_SPIN_INCREMENT 111111U
 #endif
 
 typedef struct {
-    uint32_t elements[RANDOM_PHOTON_BLOCK_SIZE];
-    uint32_t a;
-    uint32_t b;
-    uint32_t c;
-    int index;
-    int has_primed;
-} random_photon_t;
+    u32 elements[PHOTON_BLOCK_SIZE];
+    u32 a;
+    u32 b;
+    u32 c;
+    s32 index;                  /* 0..PHOTON_BLOCK_SIZE */
+    bool has_primed;
+} photon_t;
 
-random_photon_t random_photon_init(uint64_t init_a, uint64_t init_b);
-uint32_t random_photon32(random_photon_t * randomp);
+photon_t RANDOM_PREFIX(photon_init_raw)(u128 init);
+u32 RANDOM_PREFIX(photon_next)(photon_t * randomp);
+
+#define X photon
+#include "implements.h"
 
 #endif /* RANDOM_PHOTON_H_ */

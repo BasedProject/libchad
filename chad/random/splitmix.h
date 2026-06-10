@@ -1,12 +1,16 @@
 #ifndef RANDOM_SPLITMIX_H_
 #define RANDOM_SPLITMIX_H_
 
-#include <stdint.h>
+#include <terry.h>
+#include "bits.h"
 
-typedef uint64_t random_splitmix_t;
+typedef u64 splitmix_t;
 
-random_splitmix_t random_splitmix_init(uint64_t init);
-uint32_t random_splitmix32(random_splitmix_t * randomp);
-uint64_t random_splitmix64(random_splitmix_t * randomp);
+splitmix_t RANDOM_PREFIX(splitmix_init_raw)(u64 init);
+u64 RANDOM_PREFIX(splitmix_next)(splitmix_t * randomp);
+
+#define X splitmix
+#define X_NEXT_WIDTH 64
+#include "implements.h"
 
 #endif /* RANDOM_SPLITMIX_H_ */

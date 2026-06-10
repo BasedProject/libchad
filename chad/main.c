@@ -11,7 +11,6 @@ int main (int ac, char ** av) {
   timespec_t now;
   clock_gettime(CLOCK_REALTIME, &now);
   printf("current time in unix: %f\n", timespec2unix(now));
-  random_romuduo_t r[1] = {random_romuduo_init(1, 0)};
-  random_romuduo32(r);
-  printf("%lu\n", random_romuduo32(r));
+  romuduo_t r[1] = {romuduo_init(NULL, 0)};
+  printf("%u\n", romuduo_u32(r));
 }
