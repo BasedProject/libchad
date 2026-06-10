@@ -66,6 +66,20 @@ Longterm, less important requirements:
 * Licenses must use their SPDX License Identifiers (e.g.: SPDX:GPL-3.0-or-later).
 * Each library must come with a `man(1)` compatible manual.
 
+## Repository
+As mentioned, libchad is a collection of libraries.
+Most of these are owned by the creators of libchad,
+yet still managed in external repositories.
+
+| Path       | Description |
+| :--------- | :---------- |
+| chad.h     | Includes all chad headers. |
+| chad/      | Contains all chad headers. |
+| Makefile   | Produces .a and .so libraries. |
+| test/      | Contains basic sanity checks. Uses Cmdtest. |
+| object/    | Stores intermediate (object) files. |
+| library/   | Stores source files. Populated from remote repositories. |
+
 ## Contents
 
 > [!NOTE] `chad.h` includes all Chad libraries.
