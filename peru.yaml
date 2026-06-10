@@ -77,6 +77,10 @@ git module dyrect:
     url: https://github.com/agvxov/dyrect.git
     rev: bdda3e7dc60e4687fa3acb6641c0e498fc9232f3
 
+git module pathos:
+    url: https://github.com/agvxov/pathos.git
+    rev: 5f5ad776dbfe5aa8ddd6d371a905f4b58b149044
+
 git module terry:
     url: https://github.com/BasedProject/terry
     pick: terry.h
