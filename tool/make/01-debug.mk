@@ -64,8 +64,8 @@ else
                         CXXFLAGS += -flto
                 endif
         endif
-        CFLAGS   += -ftree-vectorize -march=x86-64 -mtune=generic
-        CXXFLAGS += -ftree-vectorize -march=x86-64 -mtune=generic
+        CFLAGS   += -ftree-vectorize
+        CXXFLAGS += -ftree-vectorize
         CPPFLAGS += -DNDEBUG
 endif
 

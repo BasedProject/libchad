@@ -7,7 +7,7 @@
  *  or good for compile times.
  */
 
-/* #include <chad/XXX.h" */
+#include <chad/XXX.h>
 #include <chad/dictate.h>
 /* #include <chad/dyrect.h" */
 #include <chad/ini_file.h>
