@@ -10,9 +10,12 @@ LIBRARY.orig := dictate/dictate.c \
                 libini/ini_file.c \
                 libini/ini_file.h \
                 plumblism/plumblism.h \
-                plumblism/plumblism.c
+                plumblism/plumblism.c \
+                terry/terry.h \
+                kvec/hvec.h \
+                kvec/hlist.h
 
-LIBRARY.experimental := kvec/hvec.h kvec/hlist.h
+LIBRARY.experimental :=
 LIBRARY.install := $(addprefix ${SOURCE.dir}/,$(notdir ${LIBRARY.orig})) $(addprefix ${SOURCE.dir}/experimental/,$(notdir ${LIBRARY.experimental}))
 
 define copier

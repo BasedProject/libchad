@@ -1,8 +1,6 @@
 #!/usr/bin/make -f
 .SUFFIXES:
 
-TARGET := $(shell basename $$PWD).out
-
 ## make.mk
 
 CFLAGS   := -std=c23 -O2 -pthread
