@@ -103,21 +103,21 @@ static inline f64 RANDOM_PREFIX(grand_f64)(void) {
   return (grand_u64() >> 11) * 0x1.0p-53;
 }
 
-static inline u64 RANDOM_PREFIX(grand_range_u64)(u64 low, u64 high) {
-  u64 range = high - low + 1u;
-  if (!range) return grand_u64();
-  u64 sample = grand_u64();
-  u128 product = (u128) sample * range;
-  u64 low_word = (u64) product;
+static inline u32 RANDOM_PREFIX(grand_range_u32)(u32 low, u32 high) {
+  u32 range = high - low + 1u;
+  if (!range) return grand_u32();
+  u32 sample = grand_u32();
+  u64 product = (u64) sample * range;
+  u32 low_word = (u32) product;
   if (low_word < range) {
-    u64 threshold = -range % range;
+    u32 threshold = -range % range;
     while (low_word < threshold) {
-      sample   = grand_u64();
-      product  = (u128) sample * range;
-      low_word = (u64) product;
+      sample   = grand_u32();
+      product  = (u64) sample * range;
+      low_word = (u32) product;
     }
   }
-  return low + (u64) (product >> 64);
+  return low + (u32) (product >> 32);
 }
 
 static inline i32 RANDOM_PREFIX(grand_range_i32)(i32 low, i32 high) {

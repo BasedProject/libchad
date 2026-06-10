@@ -57,7 +57,7 @@ git module libini:
 
 git module librandom:
     url: https://github.com/BasedProject/librandom.git
-    rev: 10fad7889279156b29d02467134d2dc0d552509f
+    rev: 6bf8e408198f3f330a27e938ee86edbf3d0edf68
 
 git module plumblism:
     url: https://github.com/agvxov/plumblism.git
@@ -71,13 +71,14 @@ git module xxx:
 
 git module roman:
     url: https://github.com/agvxov/roman-h.git
-    rev: 7c1b314cc2c0aba671cd3d06c2eff546f11e0d90
+    rev: ff2e892214d1f6ff9cac9de4607784b97ee6b19d
 
 git module dyrect:
     url: https://github.com/agvxov/dyrect.git
+    pick: dyrect.h
     rev: bdda3e7dc60e4687fa3acb6641c0e498fc9232f3
 
 git module terry:
     url: https://github.com/BasedProject/terry
     pick: terry.h
-    rev: d90df763f55ad4ef6ad816e95d5f1010334c9132
+    rev: e4377cb2b09d10f32c1846e85a06a759c3a238d0
