@@ -107,7 +107,7 @@ char * long2roman(long l, char * buffer) {
   #undef form_string
 }
 
-size_t long2roman_len(long l) {
+char * long2roman_len(long l) {
     char buffer[ROMAN_RENDERED_MAX];
     long2roman(l, buffer);
     return strlen(buffer);

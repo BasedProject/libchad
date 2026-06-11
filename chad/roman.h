@@ -1,8 +1,6 @@
 #ifndef ROMAN_H
 #define ROMAN_H
 
-#include <stddef.h>
-
 /* Convert between numbers and their roman string representations.
  */
 
@@ -47,7 +45,7 @@ extern char * long2roman(long l, char * buffer);
 /* Get the number of characters `l` will contain rendered.
  * Note that this is a strlen and not a sizeof.
  */
-extern size_t long2roman_len(long l);
+extern char * long2roman_len(long l);
 /* Convert from roman to long.
  * If `roman` is invalid, -1 is returned.
  */

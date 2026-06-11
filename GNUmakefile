@@ -1,6 +1,37 @@
 #!/usr/bin/make -f
 .SUFFIXES:
 
+## 05-external.mk
+
+LIBRARY.dir := library
+
+# these will be copied into chad/ ; we expect these to be in ${LIBRARY.dir}/
+
+LIBRARY.orig := dictate/dictate.c \
+                dictate/dictate.h \
+                qx/qx.h \
+                remove_all/remove_all.h \
+                sds/sds.c \
+                sds/sds.h \
+                sds/sdsalloc.h \
+                strlist/strlist.h \
+                slurp/slurp.h \
+                libini/ini_file.c \
+                libini/ini_file.h \
+                plumblism/plumblism.h \
+                plumblism/plumblism.c \
+                terry/terry.h \
+                kvec/hvec.h \
+                kvec/hlist.h \
+                XXX/XXX.h \
+                dyrect/dyrect.h \
+                roman/roman.c \
+                roman/roman.h
+
+# these will be copied into chad/experimental
+
+LIBRARY.experimental :=
+
 ## make.mk
 
 CFLAGS   := -std=c23 -O2 -pthread
@@ -9,7 +40,6 @@ LDFLAGS  := -lm
 
 SOURCE.dir := chad
 OBJECT.dir := object/source
-LIBRARY.dir := library
 MAKE.dir := tool/make
 MAKE.filter := 11-pch.mk
 

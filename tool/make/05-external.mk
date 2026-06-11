@@ -1,25 +1,7 @@
-LIBRARY.orig := dictate/dictate.c \
-                dictate/dictate.h \
-                qx/qx.h \
-                remove_all/remove_all.h \
-                sds/sds.c \
-                sds/sds.h \
-                sds/sdsalloc.h \
-                strlist/strlist.h \
-                slurp/slurp.h \
-                libini/ini_file.c \
-                libini/ini_file.h \
-                plumblism/plumblism.h \
-                plumblism/plumblism.c \
-                terry/terry.h \
-                kvec/hvec.h \
-                kvec/hlist.h
-
-LIBRARY.experimental :=
 LIBRARY.install := $(addprefix ${SOURCE.dir}/,$(notdir ${LIBRARY.orig})) $(addprefix ${SOURCE.dir}/experimental/,$(notdir ${LIBRARY.experimental}))
 
 define copier
-$(2)$(notdir $(1)): ${LIBRARY.dir}/$(1) ; @cp $$< $$@
+$(2)$(notdir $(1)): ${LIBRARY.dir}/$(1) ; cp $$< $$@
 endef
 
 ifeq (${HAS_PERU},1)
