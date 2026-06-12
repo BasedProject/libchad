@@ -46,9 +46,9 @@ git module strlist:
     rev: c0665d4b70127dea712126ffd31453b545ec6bab
 
 git module slurp:
-    url: https://github.com/BasedProject/slurp.git
+    url: https://github.com/agvxov/slurp.git
     pick: slurp.h
-    rev: 09bc49b32c7e2ed1933e1e2d7c62563571cb4002
+    rev: dcbb4dad5aef6599d12a9941a26125e602f93cd0
 
 git module libini:
     url: https://github.com/BasedProject/libini.git
@@ -71,16 +71,16 @@ git module xxx:
 
 git module roman:
     url: https://github.com/agvxov/roman-h.git
-    rev: ff2e892214d1f6ff9cac9de4607784b97ee6b19d
+    rev: 884fc58d97956541f0b4ef2664fa3f3d68a47665
 
 git module dyrect:
     url: https://github.com/agvxov/dyrect.git
     pick: dyrect.h
-    rev: bdda3e7dc60e4687fa3acb6641c0e498fc9232f3
+    rev: 3da571caa5e31fc0f0277d5d58cbe54908868f09
 
 git module pathos:
     url: https://github.com/agvxov/pathos.git
-    rev: 5f5ad776dbfe5aa8ddd6d371a905f4b58b149044
+    rev: 3c710d3a696cb903266b26377e632c9c317853d9
 
 git module terry:
     url: https://github.com/BasedProject/terry
