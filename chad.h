@@ -22,6 +22,7 @@
 #include <chad/strlist.h>
 #include <chad/terry.h>
 #include <chad/change_directory.h>
+#include <chad/utils.h>
 
 // XXX: mega broken, plz fork
 // c23 stuff and <these-fucking-things.h>
@@ -30,7 +31,6 @@
 
 // XXX: <internal code"; will have to go
 #include <chad/experimental/timespec.h>
-#include <chad/experimental/bits.h>
 #include <chad/experimental/ro.h>
 #include <chad/experimental/terminal.h>
 #include <chad/narg.h>
