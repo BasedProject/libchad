@@ -18,7 +18,7 @@ int overwrite_file(const char * const path, const char * const s);
 int append_file(const char * const path, const char * const s);
 int prepend_file(const char * const path, const char * const s);
 
-inline char * slurp(const char * const path) { return read_file(path); }
+static inline char * slurp(const char * const path) { return read_file(path); }
 
 #ifdef SLURP_IMPLEMENTATION
 
