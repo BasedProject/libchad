@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include <chad/experimental/change_directory.h>
+#include <chad/change_directory.h>
 /*  */
 #include <stdio.h>
 /*  */

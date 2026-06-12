@@ -2,8 +2,8 @@ HELP_ME += \
 "98-install.mk\n" \
 "\n"
 
-PREFIX = /usr/local
-MANPREFIX = ${PREFIX}/share/man
+PREFIX ?= /usr/local
+MANPREFIX ?= ${PREFIX}/share/man
 
 .PHONY: install
 install: chad | ${LIBTARGET}.a ${LIBTARGET}.so
