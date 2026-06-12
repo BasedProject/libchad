@@ -7,7 +7,7 @@ LIBRANDOM.object := $(addprefix ${OBJECT.dir}/,$(LIBRANDOM.object:.c=.o))
 
 vpath %.c ${SOURCE.dir}/random
 
-${SOURCE.dir}/random/%.c: ${LIBRARY.dir}/librandom/source/%.c ; @cp $< $@
-${SOURCE.dir}/random/%.h: ${LIBRARY.dir}/librandom/source/%.h ; @cp $< $@
+${SOURCE.dir}/random/%.c: ${LIBRARY.dir}/librandom/source/%.c ; cp $< $@
+${SOURCE.dir}/random/%.h: ${LIBRARY.dir}/librandom/source/%.h ; cp $< $@
 
 ALSO += ${LIBRANDOM.orig} ${LIBRANDOM.object}
