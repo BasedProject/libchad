@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 .SUFFIXES:
 
+TARGET := $(shell basename $$PWD).out
+
 ## 05-external.mk
 
 LIBRARY.dir := library
@@ -31,8 +33,6 @@ LIBRARY.orig := dictate/dictate.c \
 # these will be copied into chad/experimental
 
 LIBRARY.experimental :=
-
-TARGET := $(shell basename $$PWD).out
 
 ## make.mk
 
