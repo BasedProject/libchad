@@ -11,18 +11,22 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
-#define slurp read_file
-
 char * read_file(const char * const path);
+char * read_file_get_size(const char * const path, size_t * size);
 int write_file(const char * const path, const char * const s);
 int overwrite_file(const char * const path, const char * const s);
 int append_file(const char * const path, const char * const s);
 int prepend_file(const char * const path, const char * const s);
 
+static inline char * slurp(const char * const path) { return read_file(path); }
+
 #ifdef SLURP_IMPLEMENTATION
 
-char * read_file(const char * const path) {
+// ---
+
+char * read_file_get_size(const char * const path, size_t * size) {
     char * r = NULL;
+    *size = 0;
 
     int fd = open(path, O_RDONLY | O_CLOEXEC);
     if (fd == -1) { return r; }
@@ -31,13 +35,14 @@ char * read_file(const char * const path) {
     if (fstat(fd, &stat_buf) == -1) { return r; }
 
     if (stat_buf.st_size > 0 && S_ISREG (stat_buf.st_mode)) {
-        const off_t len = stat_buf.st_size;
+        const auto len = stat_buf.st_size;
         r = malloc(len + 1);
         if (!r) { return r; }
 
         ssize_t bytes_read = 0;
         for (ssize_t n; bytes_read < len; bytes_read += n) {
             n = read(fd, r + bytes_read, len - bytes_read);
+            *size += n;
             if (n == -1) { return r; }
             if (n == 0) { break; }
         }
@@ -65,6 +70,7 @@ char * read_file(const char * const path) {
                 }
                 memcpy(r + len, buf, bytes);
                 len += bytes;
+                *size += bytes;
             }
 
             if (feof(f)) { break; }
@@ -78,8 +84,14 @@ char * read_file(const char * const path) {
     return r;
 }
 
+char * read_file(const char * const path) {
+    size_t discarder;
+    char * r = read_file_get_size(path, &discarder);
+    return r;
+}
+
 int proto_write_file(const char * const path, const char * const s, const int flags) {
-    const ssize_t len = strlen(s);
+    const size_t len = strlen(s);
 
     int fd = open(path, flags, 0644);
     if (fd == -1) { return 1; }
@@ -121,7 +133,6 @@ int prepend_file(const char * const path, const char * const s) {
 
     return 0;
 }
-
-#endif /* SLURP_IMPLEMENTATION */
+#endif
 
 #endif
