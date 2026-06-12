@@ -71,7 +71,7 @@ git module xxx:
 
 git module roman:
     url: https://github.com/agvxov/roman-h.git
-    rev: ff2e892214d1f6ff9cac9de4607784b97ee6b19d
+    rev: 884fc58d97956541f0b4ef2664fa3f3d68a47665
 
 git module dyrect:
     url: https://github.com/agvxov/dyrect.git
