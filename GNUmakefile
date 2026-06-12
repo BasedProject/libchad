@@ -23,8 +23,6 @@ LIBRARY.orig := dictate/dictate.c \
                 plumblism/plumblism.h \
                 plumblism/plumblism.c \
                 terry/terry.h \
-                kvec/hvec.h \
-                kvec/hlist.h \
                 XXX/XXX.h \
                 dyrect/dyrect.h \
                 roman/roman.c \
@@ -32,7 +30,8 @@ LIBRARY.orig := dictate/dictate.c \
 
 # these will be copied into chad/experimental
 
-LIBRARY.experimental :=
+LIBRARY.experimental := kvec/hvec.h \
+                        kvec/hlist.h
 
 ## make.mk
 

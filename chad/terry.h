@@ -9,15 +9,13 @@
 // Primitive Types
 // ---------------
 
-#if 0
-Please read the README provided here for type guarantees:
-https://github.com/BasedProject/terry-h/blob/master/README.md
+/* Please read the README provided here for type guarantees:
+ * https://github.com/BasedProject/terry-h/blob/master/README.md
+ * 
+ * This header does not attempt to touch compiler builtins besides
+ * __float80 as that is without a standardized type.
+ */
 
-This header does not attempt to touch compiler builtins besides
-__float80 as that is without a standardized type.
-#endif
-
-#include <assert.h>
 #include <limits.h>
 #include <stdint.h>
 #include <float.h>

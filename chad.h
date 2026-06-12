@@ -21,6 +21,7 @@
 #include <chad/slurp.h>
 #include <chad/strlist.h>
 #include <chad/terry.h>
+#include <chad/change_directory.h>
 
 // XXX: mega broken, plz fork
 // c23 stuff and <these-fucking-things.h>
@@ -32,7 +33,6 @@
 #include <chad/experimental/bits.h>
 #include <chad/experimental/ro.h>
 #include <chad/experimental/terminal.h>
-#include <chad/experimental/change_directory.h>
 #include <chad/narg.h>
 
 #endif
