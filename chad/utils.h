@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <iso646.h>
+#include <math.h>
 
 #define UNUSED(x) ((void)x)
 
@@ -41,6 +42,10 @@ long map(
 
 long signum(long x) {
     return (x > 0) - (x < 0);
+}
+
+double radians(double degrees) {
+    return degrees * (M_PI / 180.0);
 }
 
 #endif
