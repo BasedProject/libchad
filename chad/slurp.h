@@ -36,7 +36,7 @@ char * read_file_get_size(const char * const path, size_t * size) {
 
     if (stat_buf.st_size > 0 && S_ISREG (stat_buf.st_mode)) {
         const auto len = stat_buf.st_size;
-        r = malloc(len + 1);
+        r = (char*)malloc(len + 1);
         if (!r) { return r; }
 
         ssize_t bytes_read = 0;
@@ -65,7 +65,7 @@ char * read_file_get_size(const char * const path, size_t * size) {
             if (bytes > 0) {
                 while (len + bytes > cap) {
                     cap *= 2;
-                    r = realloc(r, cap);
+                    r = (char*)realloc(r, cap);
                     if (!r) { goto error; }
                 }
                 memcpy(r + len, buf, bytes);
