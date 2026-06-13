@@ -39,4 +39,8 @@ long map(
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
+long signum(long x) {
+    return (x > 0) - (x < 0);
+}
+
 #endif
