@@ -22,6 +22,11 @@
 #define EMPTY()
 #define QUOTE(id) id EMPTY()
 
+/* Allows passign commas to macro functions
+ *  without confusing their argument splitting.
+ */
+#define COMMA ,
+
 // could be a generic
 static inline
 long map(
