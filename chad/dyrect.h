@@ -20,6 +20,8 @@
 // TODO: theres a logical inconsistency between ride-hang and rock-paper; either justify it or normalize it
 // TODO: absolute sizing functions
 // TODO: next vs after is hard to remember
+// TODO: fullscreen operation
+// TODO: sink operation
 
 /* Dyrect can use an arbitrary C style namespace,
  *  or use the prefix `dr_` if the following feature macro is requested.
