@@ -11,9 +11,7 @@
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define CLAMP(a, b, c) ((a) < (b) ? (b) : (a) > (c) ? (c) : (a))
 
-
-/* Convert argument to a string literal.
- */
+/* Convert argument to a string literal. */
 #define _STRINGIFY(...) # __VA_ARGS__
 #define STRINGIFY(...) _STRINGIFY(__VA_ARGS__)
 
@@ -28,9 +26,10 @@
  */
 #define COMMA ,
 
-// could be a generic
+// could be a generics:
+
 static inline
-long map(
+long long_map(
     long x,
     long in_min,
     long in_max,
