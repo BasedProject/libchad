@@ -43,8 +43,7 @@ static inline long signum(long x) {
     return (x > 0) - (x < 0);
 }
 
-static inline double radians(double degrees) {
-    return degrees * (M_PI / 180.0);
-}
+#define degrees(x) ((RAD2DEG)*(x))
+#define radians(x) ((DEG2RAD)*(x))
 
 #endif
