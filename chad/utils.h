@@ -11,9 +11,7 @@
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define CLAMP(a, b, c) ((a) < (b) ? (b) : (a) > (c) ? (c) : (a))
 
-
-/* Convert argument to a string literal.
- */
+/* Convert argument to a string literal. */
 #define _STRINGIFY(...) # __VA_ARGS__
 #define STRINGIFY(...) _STRINGIFY(__VA_ARGS__)
 
@@ -41,9 +39,10 @@
  */
 #define COMMA ,
 
-// could be a generic
+// could be a generics:
+
 static inline
-long map(
+long long_map(
     long x,
     long in_min,
     long in_max,
@@ -53,12 +52,11 @@ long map(
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-long signum(long x) {
+static inline long signum(long x) {
     return (x > 0) - (x < 0);
 }
 
-double radians(double degrees) {
-    return degrees * (M_PI / 180.0);
-}
+#define degrees(x) ((RAD2DEG)*(x))
+#define radians(x) ((DEG2RAD)*(x))
 
 #endif
