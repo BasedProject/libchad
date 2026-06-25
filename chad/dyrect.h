@@ -16,10 +16,8 @@
  *  In case I'm wrong, please throw me an email. (agvxov@gmail.com)
  */
 
-// TODO: further macro hell x, y, width and height so they can be user overwritten too
-// TODO: theres a logical inconsistency between ride-hang and rock-paper; either justify it or normalize it
-// TODO: absolute sizing functions
-// TODO: next vs after is hard to remember
+// TODO: reach is hard to conceptulize
+// TODO: scale is somewhat redundant
 
 /* Dyrect can use an arbitrary C style namespace,
  *  or use the prefix `dr_` if the following feature macro is requested.
@@ -41,13 +39,15 @@
 
 #ifdef RAYLIB_H
 # define rect_t Rectangle
+# define w width
+# define h height
 static inline
 rect_t DYRECT_PREFIX(get_screen_rect)(void) {
     return (rect_t) {
         .x = 0,
         .y = 0,
-        .width  = (float)GetScreenWidth(),
-        .height = (float)GetScreenHeight(),
+        .w = (float)GetScreenWidth(),
+        .h = (float)GetScreenHeight(),
     };
 }
 #endif
@@ -63,41 +63,79 @@ rect_t DYRECT_PREFIX(get_screen_rect)(void) {
  */
 #ifndef rect_t
 typedef struct rect_t {
-    float x, y, width, height;
+    float x, y, w, h;
 } rect_t;
 #endif
 
+#ifndef x
+# define x x
+#endif
+#ifndef y
+# define y y
+#endif
+#ifndef w
+# define w w
+#endif
+#ifndef h
+# define h h
+#endif
+
 #ifdef __NCURSES_H
-# define DNUNPACK(r) (int)r.height, (int)r.width, (int)r.y, (int)r.x
+# define DNUNPACK(r) (int)r.h, (int)r.w, (int)r.y, (int)r.x
 static inline
 rect_t DYRECT_PREFIX(get_screen_rect)(void) {
     return (rect_t) {
         .x = 0,
         .y = 0,
-        .width  = (float)COLS,
-        .height = (float)LINES,
+        .w  = (float)COLS,
+        .h = (float)LINES,
     };
 }
 #endif
 
-// tl;dr
+// # TL;DR
+// Utility
+/* Return a rect with one or more properties operated on arbitrarily.
+ * Examples:
+ *   dyrect(r, +4, +0, +0, +0) // Move to the right by 4 units; pass unused explicitly
+ *   dyrect(r, , , *2, *2)     // Scale a rectangle by 2; pass unused implicitly
+ */
+#define dyrect(r, a, b, c, d) ( \
+    (rect_t) {                  \
+        .x = r.x a,             \
+        .y = r.y b,             \
+        .w = r.w c,             \
+        .h = r.h d,             \
+    }\
+)
 static inline rect_t DYRECT_PREFIX(rfloor)(rect_t r);
 static inline rect_t DYRECT_PREFIX(get_unit_rect)(void);
 /*                   DYRECT_PREFIX(get_screen_rect)(void); // only when known library is detected */
-static inline rect_t DYRECT_PREFIX(scaley)(rect_t a, float f);
+// Resizing
 static inline rect_t DYRECT_PREFIX(scalex)(rect_t a, float f);
+static inline rect_t DYRECT_PREFIX(scaley)(rect_t a, float f);
+static inline rect_t DYRECT_PREFIX(scalexy)(rect_t a, float fw, float fh);
 static inline rect_t DYRECT_PREFIX(scale)(rect_t a, float f);
-static inline rect_t DYRECT_PREFIX(shift)(rect_t source, int n);
-static inline rect_t DYRECT_PREFIX(slip)(rect_t source, int n);
+static inline rect_t DYRECT_PREFIX(growx)(rect_t a, float f);
+static inline rect_t DYRECT_PREFIX(growy)(rect_t a, float f);
+static inline rect_t DYRECT_PREFIX(growxy)(rect_t a, float fw, float fh);
+static inline rect_t DYRECT_PREFIX(grow)(rect_t a, float f);
+// Absolute Moving
+static inline rect_t DYRECT_PREFIX(rail_step)(rect_t source, int n);
+static inline rect_t DYRECT_PREFIX(rope_step)(rect_t source, int n);
+// Relative Moving
+static inline rect_t DYRECT_PREFIX(inner_up)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(inner_down)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(inner_left)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(inner_right)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(outer_up)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(outer_down)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(outer_left)(rect_t dest, rect_t source);
+static inline rect_t DYRECT_PREFIX(outer_right)(rect_t dest, rect_t source);
 static inline rect_t DYRECT_PREFIX(balance)(rect_t dest, rect_t source);
 static inline rect_t DYRECT_PREFIX(buoyance)(rect_t dest, rect_t source);
 static inline rect_t DYRECT_PREFIX(center)(rect_t dest, rect_t source);
-static inline rect_t DYRECT_PREFIX(hang)(rect_t dest, rect_t source);
-static inline rect_t DYRECT_PREFIX(ride)(rect_t dest, rect_t source);
-static inline rect_t DYRECT_PREFIX(rock)(rect_t dest, rect_t source);
-static inline rect_t DYRECT_PREFIX(paper)(rect_t dest, rect_t source);
-static inline rect_t DYRECT_PREFIX(next)(rect_t source, int n);
-static inline rect_t DYRECT_PREFIX(after)(rect_t source, int n);
+// ???
 static inline rect_t DYRECT_PREFIX(reachy)(rect_t dest, rect_t source);
 static inline rect_t DYRECT_PREFIX(reachx)(rect_t dest, rect_t source);
 
@@ -113,8 +151,8 @@ rect_t DYRECT_PREFIX(rfloor)(rect_t r) {
     return (rect_t) {
         .x = (float)(long long)r.x,
         .y = (float)(long long)r.y,
-        .width  = (float)(long long)r.width,
-        .height = (float)(long long)r.height,
+        .w = (float)(long long)r.w,
+        .h = (float)(long long)r.h,
     };
 }
 
@@ -131,13 +169,13 @@ rect_t DYRECT_PREFIX(get_unit_rect)(void) {
     return (rect_t) {
         .x = 0,
         .y = 0,
-        .width  = 1,
-        .height = 1,
+        .w = 1,
+        .h = 1,
     };
 }
 
 
-/* Modify the width by a factor.
+/* Modify the w by a factor.
  *
  *   +-+   __\  +---+
  *   +-+     /  +---+
@@ -147,13 +185,13 @@ rect_t DYRECT_PREFIX(scalex)(rect_t a, float f) {
     return (rect_t) {
         .x = a.x,
         .y = a.y,
-        .width  = a.width  * f,
-        .height = a.height,
+        .w = a.w  * f,
+        .h = a.h,
     };
 }
 
 
-/* Modify the height by a factor.
+/* Modify the h by a factor.
  *
  *   +-+   __\  +-+
  *   +-+     /  | |
@@ -164,14 +202,28 @@ rect_t DYRECT_PREFIX(scaley)(rect_t a, float f) {
     return (rect_t) {
         .x = a.x,
         .y = a.y,
-        .width  = a.width,
-        .height = a.height * f,
+        .w = a.w,
+        .h = a.h * f,
     };
 }
 
+/* Modify the h and w by different factors.
+ *
+ *   +-+   __\  +---+
+ *   +-+     /  |   |
+ *              +---+
+ */
+static inline
+rect_t DYRECT_PREFIX(scalexy)(rect_t a, float fw, float fh) {
+    return (rect_t) {
+        .x = a.x,
+        .y = a.y,
+        .w = a.w  * fw,
+        .h = a.h * fh,
+    };
+}
 
-/* Modify the height and width by a factor.
- *  Exists because its judged to be a common operation.
+/* Modify the h and w by the same factor.
  *
  *   +-+   __\  +---+
  *   +-+     /  |   |
@@ -182,67 +234,88 @@ rect_t DYRECT_PREFIX(scale)(rect_t a, float f) {
     return (rect_t) {
         .x = a.x,
         .y = a.y,
-        .width  = a.width  * f,
-        .height = a.height * f,
+        .w = a.w  * f,
+        .h = a.h * f,
     };
 }
 
-/* Move horizontally by an absolute number of units.
- *
- *   +-+  __\  +-+
- *   +-+    /  +-+
- *
- */
-static inline
-rect_t DYRECT_PREFIX(shift)(rect_t source, int n) {
-    return (rect_t) {
-        .x = source.x + n,
-        .y = source.y,
-        .width  = source.width,
-        .height = source.height,
-    };
-}
-
-/* Move vertically by an absolute number of units.
- *
- *   +-+
- *   +-+
- *    V
- *   +-+
- *   +-+
- */
-static inline
-rect_t DYRECT_PREFIX(slip)(rect_t source, int n) {
-    return (rect_t) {
-        .x = source.x,
-        .y = source.y + n,
-        .width  = source.width,
-        .height = source.height,
-    };
-}
-
-/* Align to the middle horizontally
- *
+/* Modify the w by a factor, while not moving the center point.
  *   +---+---+---+
- *   | :         |
- *   +---+       |
- *   |   |       |
- *   |   |       |
- *   +---+       |
- *   | :         |
+ *   | < |   | > |
  *   +---+---+---+
  */
 static inline
-rect_t DYRECT_PREFIX(balance)(rect_t dest, rect_t source) {
+rect_t DYRECT_PREFIX(growx)(rect_t a, float f) {
     return (rect_t) {
-        .x = dest.x + ((dest.width - source.width) / 2),
-        .y = source.y,
-        .width  = source.width,
-        .height = source.height,
+        .x = a.x + (a.w - (a.w * f)) * 0.5,
+        .y = a.y,
+        .w = a.w * f,
+        .h = a.h,
     };
 }
 
-/* Align to the middle vertically
+/* Modify the h by a factor, while not moving the center point.
+ *   +---+
+ *   | ^ |
+ *   | ^ |
+ *   +---+
+ *   |   |
+ *   +---+
+ *   | v |
+ *   | v |
+ *   +---+
+ */
+static inline
+rect_t DYRECT_PREFIX(growy)(rect_t a, float f) {
+    return (rect_t) {
+        .x = a.x,
+        .y = a.y + (a.h - (a.h * f)) * 0.5,
+        .w = a.w,
+        .h = a.h * f,
+    };
+}
+
+/* Modify the w and h by factors, while not moving the center point.
+ *   +-+---+-+
+ *   |   ^   |
+ *   |   ^   |
+ *   + +---+ +
+ *   |<|   |>|
+ *   + +---+ +
+ *   |   v   |
+ *   |   v   |
+ *   +-+---+-+
+ */
+static inline
+rect_t DYRECT_PREFIX(growxy)(rect_t a, float fw, float fh) {
+    return (rect_t) {
+        .x = a.x + (a.w  - (a.w  * fw)) * 0.5,
+        .y = a.y + (a.h - (a.h * fh)) * 0.5,
+        .w = a.w  * fw,
+        .h = a.h * fh,
+    };
+}
+
+/* Modify the w and h by a factor, while not moving the center point
+ *   +---------+
+ *   |    A    |
+ *   |  +---+  |
+ *   |< |   | >|
+ *   |  +---+  |
+ *   |    v    |
+ *   +---------+
+ */
+static inline
+rect_t DYRECT_PREFIX(grow)(rect_t a, float f) {
+    return (rect_t) {
+        .x = a.x + (a.w  - (a.w * f))  * 0.5,
+        .y = a.y + (a.h - (a.h * f)) * 0.5,
+        .w = a.w  * f,
+        .h = a.h * f,
+    };
+}
+
+/* Align to the middle horizontally.
  *
  *   +---+---+---+
  *   |   |   |   |
@@ -254,18 +327,38 @@ rect_t DYRECT_PREFIX(balance)(rect_t dest, rect_t source) {
  *   +---+---+---+
  */
 static inline
+rect_t DYRECT_PREFIX(balance)(rect_t dest, rect_t source) {
+    return (rect_t) {
+        .x = dest.x + ((dest.w - source.w) / 2),
+        .y = source.y,
+        .w = source.w,
+        .h = source.h,
+    };
+}
+
+/* Align to the middle vertically.
+ *
+ *   +---+---+---+
+ *   | :         |
+ *   +---+       |
+ *   |   |       |
+ *   |   |       |
+ *   +---+       |
+ *   | :         |
+ *   +---+---+---+
+ */
+static inline
 rect_t DYRECT_PREFIX(buoyance)(rect_t dest, rect_t source) {
     return (rect_t) {
         .x = source.x,
-        .y = dest.y + ((dest.height - source.height) / 2),
-        .width  = source.width,
-        .height = source.height,
+        .y = dest.y + ((dest.h - source.h) / 2),
+        .w = source.w,
+        .h = source.h,
     };
 }
 
 
 /* Balance and Buoyance. Align to the middle vertically and horizontally.
- *  Exists because its judged to be a common operation.
  *
  *   +-----------+
  *   |     :     |
@@ -284,25 +377,87 @@ rect_t DYRECT_PREFIX(center)(rect_t dest, rect_t source) {
 
 /* Dangles from the top.
  *
- *   +---+-------+
- *   |   |       |
- *   |   |       |
- *   +---+       |
+ *   +-+---+-----+
+ *   | |   |     |
+ *   | |   |     |
+ *   | +---+     |
  *   |           |
  *   |           |
  *   |           |
  *   +-----------+
  */
 static inline
-rect_t DYRECT_PREFIX(hang)(rect_t dest, rect_t source) {
+rect_t DYRECT_PREFIX(inner_up)(rect_t dest, rect_t source) {
     return (rect_t) {
         .x = source.x,
         .y = dest.y,
-        .width  = source.width,
-        .height = source.height,
+        .w = source.w,
+        .h = source.h,
     };
 }
 
+/* Dangles from the bottom.
+ *
+ *   +-----------+
+ *   |           |
+ *   |           |
+ *   |           |
+ *   |     +---+ |
+ *   |     |   | |
+ *   |     |   | |
+ *   +-----+---+-+
+ */
+static inline
+rect_t DYRECT_PREFIX(inner_down)(rect_t dest, rect_t source) {
+    return (rect_t) {
+        .x = dest.x,
+        .y = dest.y + dest.h - source.h,
+        .w = source.w,
+        .h = source.h,
+    };
+}
+
+/* Dangles from the left.
+ *
+ *   +-----------+
+ *   |           |
+ *   |           |
+ *   +---+       |
+ *   |   |       |
+ *   |   |       |
+ *   +---+       |
+ *   +-----------+
+ */
+static inline
+rect_t DYRECT_PREFIX(inner_left)(rect_t dest, rect_t source) {
+    return (rect_t) {
+        .x = dest.x,
+        .y = source.y,
+        .w = source.w,
+        .h = source.h,
+    };
+}
+
+/* Dangles from the right.
+ *
+ *   +-----------+
+ *   |       +---+
+ *   |       |   |
+ *   |       |   |
+ *   |       +---+
+ *   |           |
+ *   |           |
+ *   +-----------+
+ */
+static inline
+rect_t DYRECT_PREFIX(inner_right)(rect_t dest, rect_t source) {
+    return (rect_t) {
+        .x = dest.x + dest.w - source.w,
+        .y = source.y,
+        .w = source.w,
+        .h = source.h,
+    };
+}
 
 /* Places on the top.
  *
@@ -319,61 +474,80 @@ rect_t DYRECT_PREFIX(hang)(rect_t dest, rect_t source) {
  *   +-----------+
  */
 static inline
-rect_t DYRECT_PREFIX(ride)(rect_t dest, rect_t source) {
+rect_t DYRECT_PREFIX(outer_up)(rect_t dest, rect_t source) {
     return (rect_t) {
         .x = source.x,
-        .y = dest.y - source.height,
-        .width  = source.width,
-        .height = source.height,
+        .y = dest.y - source.h,
+        .w = source.w,
+        .h = source.h,
     };
 }
 
-
-/* Moves to the left.
- *  NOTE: this is a reference to the political compass, for easy memorization.
+/* Places on the bottom.
  *
+ *   +-----------+
+ *   |           |
+ *   |           |
+ *   |           |
+ *   |           |
+ *   |           |
+ *   |           |
  *   +---+-------+
- *   |   |       |
- *   |   |       |
- *   +---+       |
- *   |           |
- *   |           |
- *   |           |
- *   +-----------+
+ *   |   |
+ *   |   |
+ *   +---+
  */
 static inline
-rect_t DYRECT_PREFIX(rock)(rect_t dest, rect_t source) {
+rect_t DYRECT_PREFIX(outer_down)(rect_t dest, rect_t source) {
     return (rect_t) {
-        .x = dest.x,
-        .y = source.y,
-        .width  = source.width,
-        .height = source.height,
+        .x = source.x,
+        .y = dest.y + dest.h,
+        .w = source.w,
+        .h = source.h,
     };
 }
 
-
-/* Moves to the right.
- *  NOTE: this is a reference to the political compass, for easy memorization.
+/* Places on the left.
  *
- *   +-------+---+
- *   |       |   |
- *   |       |   |
- *   |       +---+
+ *   +---+-----------+
+ *   |   |           |
+ *   |   |           |
+ *   +---+           |
+ *       |           |
+ *       |           |
+ *       |           |
+ *       +-----------+
+ */
+static inline
+rect_t DYRECT_PREFIX(outer_left)(rect_t dest, rect_t source) {
+    return (rect_t) {
+        .x = dest.x - source.w,
+        .y = source.y,
+        .w = source.w,
+        .h = source.h,
+    };
+}
+
+/* Places on the right.
+ *
+ *   +-----------+---+
+ *   |           |   |
+ *   |           |   |
+ *   |           +---+
  *   |           |
  *   |           |
  *   |           |
  *   +-----------+
  */
 static inline
-rect_t DYRECT_PREFIX(paper)(rect_t dest, rect_t source) {
+rect_t DYRECT_PREFIX(outer_right)(rect_t dest, rect_t source) {
     return (rect_t) {
-        .x = (dest.x + dest.width) - source.width,
+        .x = dest.x + dest.w,
         .y = source.y,
-        .width  = source.width,
-        .height = source.height,
+        .w = source.w,
+        .h = source.h,
     };
 }
-
 
 /* Gets the N-th horizontal neighbour.
  *
@@ -383,12 +557,12 @@ rect_t DYRECT_PREFIX(paper)(rect_t dest, rect_t source) {
  *   +---+---+
  */
 static inline
-rect_t DYRECT_PREFIX(next)(rect_t source, int n) {
+rect_t DYRECT_PREFIX(rail_step)(rect_t source, int n) {
     return (rect_t) {
-        .x = source.x + (source.width * n),
+        .x = source.x + (source.w * n),
         .y = source.y,
-        .width  = source.width,
-        .height = source.height,
+        .w = source.w,
+        .h = source.h,
     };
 }
 
@@ -403,25 +577,25 @@ rect_t DYRECT_PREFIX(next)(rect_t source, int n) {
  *   +---+
  */
 static inline
-rect_t DYRECT_PREFIX(after)(rect_t source, int n) {
+rect_t DYRECT_PREFIX(rope_step)(rect_t source, int n) {
     return (rect_t) {
         .x = source.x,
-        .y = source.y + (source.height * n),
-        .width  = source.width,
-        .height = source.height,
+        .y = source.y + (source.h * n),
+        .w = source.w,
+        .h = source.h,
     };
 }
 
 /* Make the closest opposite facing vertical edges touch.
  *  or fill the destination vectically.
- *                          | 
- *   +--+          +--+     | 
- *   |  |          |  |     |   +------+       +-+--+-+
- *   +--+          |  |     |   | +--+ |  __\  | |  | |
- *           __\   |  |     |   | +--+ |    /  | |  | |
- *     +--+    /   +--+-+   |   +------+       +-+--+-+
- *     |  |          |  |   | 
- *     +--+          +--+   | 
+ *                          ||| 
+ *   +--+          +--+     ||| 
+ *   |  |          |  |     |||   +------+       +-+--+-+
+ *   +--+          |  |     |||   | +--+ |  __\  | |  | |
+ *           __\   |  |     |||   | +--+ |    /  | |  | |
+ *     +--+    /   +--+-+   |||   +------+       +-+--+-+
+ *     |  |          |  |   ||| 
+ *     +--+          +--+   ||| 
  */
 static inline
 rect_t DYRECT_PREFIX(reachy)(rect_t dest, rect_t source) {
@@ -429,34 +603,34 @@ rect_t DYRECT_PREFIX(reachy)(rect_t dest, rect_t source) {
         (rect_t) {
             .x = source.x,
             .y = source.y,
-            .width  = source.width,
-            .height = dest.y - source.y,
+            .w = source.w,
+            .h = dest.y - source.y,
         }
-    : ((dest.y + dest.height) < (source.y + source.height)) ?
+    : ((dest.y + dest.h) < (source.y + source.h)) ?
         (rect_t) {
             .x = source.x,
-            .y = dest.y + dest.height,
-            .width  = source.width,
-            .height = source.height - ((dest.y + dest.height) - source.y),
+            .y = dest.y + dest.h,
+            .w = source.w,
+            .h = source.h - ((dest.y + dest.h) - source.y),
         }
     :
         (rect_t) {
             .x = source.x,
             .y = dest.y,
-            .width  = source.width,
-            .height = dest.height,
+            .w = source.w,
+            .h = dest.h,
         }
     ;
 }
 
 /* Make the closest opposite facing horizontal edge touch,
  *  or fill the destination horizontally.
- *        +--+           +----+  |  +------+       +------+
- *        |  |           |    |  |  |      |       |      |
- *        +--+  __\      +----+  |  | +--+ |  __\  +------+
- *   +--+         /   +--+       |  | |  | |    /  |      |
- *   |  |             |  |       |  | +--+ |       +------+
- *   +--+             +--+       |  +------+       +------+
+ *        +--+           +----+  |||  +------+       +------+
+ *        |  |           |    |  |||  |      |       |      |
+ *        +--+  __\      +----+  |||  | +--+ |  __\  +------+
+ *   +--+         /   +--+       |||  | |  | |    /  |      |
+ *   |  |             |  |       |||  | +--+ |       +------+
+ *   +--+             +--+       |||  +------+       +------+
  */
 static inline
 rect_t DYRECT_PREFIX(reachx)(rect_t dest, rect_t source) {
@@ -464,26 +638,30 @@ rect_t DYRECT_PREFIX(reachx)(rect_t dest, rect_t source) {
         (rect_t) {
             .x = source.x,
             .y = source.y,
-            .width  = dest.x - source.x,
-            .height = source.height,
+            .w = dest.x - source.x,
+            .h = source.h,
         }
-    : ((dest.x + dest.width) < (source.x + source.width)) ?
+    : ((dest.x + dest.w) < (source.x + source.w)) ?
         (rect_t) {
-            .x = dest.x + dest.width,
+            .x = dest.x + dest.w,
             .y = source.y,
-            .width  = source.width - ((dest.x + dest.width)- source.x),
-            .height = source.height,
+            .w = source.w - ((dest.x + dest.w)- source.x),
+            .h = source.h,
         }
     :
         (rect_t) {
             .x = dest.x,
             .y = source.y,
-            .width  = dest.width,
-            .height = source.height,
+            .w = dest.w,
+            .h = source.h,
         }
     ;
 }
 
-#endif
+#undef x
+#undef y
+#undef w
+#undef h
 
+#endif
 // This header is in the Public Domain. If you say this notice is inadequate, I will sue you.

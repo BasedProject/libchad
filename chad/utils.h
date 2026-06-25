@@ -19,6 +19,19 @@
 
 /* Prevent argument from being expended as a macro.
  * Named after the POSIX shell rule that quoted strings are not checked for aliases.
+ * Note that it only works on maro functions!
+ * Examples:
+ *   int a(void) { return 1; }
+ *   int b(void) { return 2; }
+ *   int c(void) { return 3; }
+ *   // ---
+ *   #define a(...) c(__VA_ARGS__)
+ *   QUOTE(a)(); // 1
+ *   // ---
+ *   QUOTE(a()); // 3 !!! a expanded before QUOTE
+ *   // ---
+ *   #define b c
+ *   QUOTE(b)(); // 3 !!! b is not a maro function, quoting failed!
  */
 #define EMPTY()
 #define QUOTE(id) id EMPTY()

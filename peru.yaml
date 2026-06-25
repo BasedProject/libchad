@@ -38,7 +38,7 @@ git module remove_all:
 git module sds:
     url: https://github.com/jcorporation/sds.git
     pick: [sds.c, sds.h, sdsalloc.h]
-    rev: a7752dc1f1cb5550b88f15d441920de0f4841509
+    rev: c50b215248182cd9ed831391a920303ebf7316de
 
 git module strlist:
     url: https://github.com/BasedProject/strlist.git
@@ -76,7 +76,7 @@ git module roman:
 git module dyrect:
     url: https://github.com/agvxov/dyrect.git
     pick: dyrect.h
-    rev: 3da571caa5e31fc0f0277d5d58cbe54908868f09
+    rev: 28d61e884629852c8dd3144f77a9fb43fa5dd6b5
 
 git module pathos:
     url: https://github.com/agvxov/pathos.git
