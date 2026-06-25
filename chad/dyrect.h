@@ -41,6 +41,8 @@
 # define rect_t Rectangle
 # define w width
 # define h height
+# define dyrect_w_ width
+# define dyrect_h_ height
 static inline
 rect_t DYRECT_PREFIX(get_screen_rect)(void) {
     return (rect_t) {
@@ -67,17 +69,25 @@ typedef struct rect_t {
 } rect_t;
 #endif
 
+/* The prefixed versions are never undefined,
+ *  as such, they can be used inside macros defined in this header.
+ * E.g. dyrect()
+ */
 #ifndef x
 # define x x
+# define dyrect_x_ x
 #endif
 #ifndef y
 # define y y
+# define dyrect_y_ y
 #endif
 #ifndef w
 # define w w
+# define dyrect_w_ w
 #endif
 #ifndef h
 # define h h
+# define dyrect_h_ h
 #endif
 
 #ifdef __NCURSES_H
@@ -87,7 +97,7 @@ rect_t DYRECT_PREFIX(get_screen_rect)(void) {
     return (rect_t) {
         .x = 0,
         .y = 0,
-        .w  = (float)COLS,
+        .w = (float)COLS,
         .h = (float)LINES,
     };
 }
@@ -100,12 +110,12 @@ rect_t DYRECT_PREFIX(get_screen_rect)(void) {
  *   dyrect(r, +4, +0, +0, +0) // Move to the right by 4 units; pass unused explicitly
  *   dyrect(r, , , *2, *2)     // Scale a rectangle by 2; pass unused implicitly
  */
-#define dyrect(r, a, b, c, d) ( \
-    (rect_t) {                  \
-        .x = r.x a,             \
-        .y = r.y b,             \
-        .w = r.w c,             \
-        .h = r.h d,             \
+#define dyrect(r, a, b, c, d) (     \
+    (rect_t) {                      \
+        .dyrect_x_ = r.dyrect_x_ a, \
+        .dyrect_y_ = r.dyrect_y_ b, \
+        .dyrect_w_ = r.dyrect_w_ c, \
+        .dyrect_h_ = r.dyrect_h_ d, \
     }\
 )
 static inline rect_t DYRECT_PREFIX(rfloor)(rect_t r);

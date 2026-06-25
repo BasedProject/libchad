@@ -76,7 +76,7 @@ git module roman:
 git module dyrect:
     url: https://github.com/agvxov/dyrect.git
     pick: dyrect.h
-    rev: 28d61e884629852c8dd3144f77a9fb43fa5dd6b5
+    rev: b993590ed5e804d74948cb61163346f2f047c84f
 
 git module pathos:
     url: https://github.com/agvxov/pathos.git
