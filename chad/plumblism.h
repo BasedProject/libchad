@@ -13,6 +13,13 @@
  *          I have no clue who came up with it
  */
 
+/* Memory requirements per pixel:
+ *  Type | On disk | In memory
+ *  PBM  : 1 bit   : 1 int
+ *  PGM  : 1 byte  : 1 int
+ *  PGM  : 3 bytes : 3 int
+ */
+
 typedef enum {
     PNM_FORMAT_ERROR,
     /* NOTE:
@@ -33,7 +40,7 @@ typedef enum {
  */
 pnm_type_t get_pnm_type(FILE * f);
 
-/* Return storage requirement.
+/* Return storage requirement in number of ints (NOT bytes).
  * `f` will be rewinded automatically.
  * `w`, `h` and `intensity` are nullable.
  * In case of a `PNM_BIT_*`, intensity will always be 1 (assuming success).

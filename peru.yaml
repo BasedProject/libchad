@@ -63,7 +63,7 @@ git module plumblism:
     url: https://github.com/agvxov/plumblism.git
     export: source/
     pick:   source/
-    rev: 00832e662bc17e899a25fc19031291b5729b60fd
+    rev: f3d70cf0181d7e1b26a92e02ae61e6f9ba8a3449
 
 git module xxx:
     url: https://github.com/agvxov/XXX-h.git

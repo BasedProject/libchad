@@ -155,7 +155,22 @@ int read_pnm_header(FILE * f, pnm_type_t type, int * w, int * h, int * intensity
     if (h        ) { *h         = h_        ; }
     if (intensity) { *intensity = intensity_; }
 
-    return w_ * h_ * sizeof(int);
+    int bytes_per_pixel;
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wswitch"
+    switch (type) {
+        case PNM_BIT_ASCII:
+        case PNM_BIT_BINARY:
+        case PNM_GRE_ASCII:
+        case PNM_GRE_BINARY:
+            bytes_per_pixel = 1;
+        case PNM_PIX_ASCII:
+        case PNM_PIX_BINARY:
+            bytes_per_pixel = 3;
+    }
+  #pragma GCC diagnostic pop
+
+    return w_ * h_ * bytes_per_pixel;
 }
 
 static
