@@ -37,16 +37,17 @@ pnm_type_t get_pnm_type(FILE * f) {
     magic[0] = fgetc(f);
     magic[1] = fgetc(f);
  
-    if (magic[0] != 'P') { return -1; }
+    if (magic[0] != 'P') { return PNM_FORMAT_ERROR; }
 
-    return magic[1] - '0';
+    return (pnm_type_t)(magic[1] - '0'); // c++ism
 }
 
 // --- Lexers
 static
 int lex_header(FILE * f) {
     int r;
-    char digit_buffer[12];
+    const int digit_buffer_size = 12;
+    char digit_buffer[digit_buffer_size];
     int digit_buffer_empty_top = 0;
 
     state_t state = INITIAL;
@@ -59,7 +60,7 @@ int lex_header(FILE * f) {
                 switch (c) {
                     case DIGIT: {
                         BEGIN(IN_NUMBER);
-                        digit_buffer[digit_buffer_empty_top++] = c;
+                        goto digit;
                     } break;
                     case '#': BEGIN(IN_COMMENT); break;
                     case WS: { ; } break;
@@ -70,7 +71,11 @@ int lex_header(FILE * f) {
             case IN_NUMBER: {
                 switch (c) {
                     case DIGIT: {
+                      digit:
                         digit_buffer[digit_buffer_empty_top++] = c;
+                        if (digit_buffer_empty_top == digit_buffer_size) {
+                            return -2;
+                        }
                     } break;
                     case WS: {
                         DIGIT_BUFFER_TO_INT(digit_buffer, digit_buffer_empty_top, r);
@@ -150,7 +155,7 @@ int read_pnm_header(FILE * f, pnm_type_t type, int * w, int * h, int * intensity
     if (h        ) { *h         = h_        ; }
     if (intensity) { *intensity = intensity_; }
 
-    return (*w) * (*h) * sizeof(int);
+    return w_ * h_ * sizeof(int);
 }
 
 static
@@ -225,6 +230,8 @@ int read_pnm_pix_binary_data(FILE * f, int * b) {
 }
 
 int read_pnm_data(FILE * f, pnm_type_t type, int * b) {
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wswitch"
     switch (type) {
         case PNM_BIT_ASCII:  return read_pnm_bit_ascii_data(f, b);
         case PNM_GRE_ASCII:  return read_pnm_gray_ascii_data(f, b);
@@ -233,6 +240,7 @@ int read_pnm_data(FILE * f, pnm_type_t type, int * b) {
         case PNM_GRE_BINARY: return read_pnm_gray_binary_data(f, b);
         case PNM_PIX_BINARY: return read_pnm_pix_binary_data(f, b);
     }
+  #pragma GCC diagnostic pop
 
     return -1;
 }
@@ -320,6 +328,8 @@ int write_pnm_file(FILE * f, pnm_type_t type, const int * b, int w, int h, int i
         r += fprintf(f, "\n%d %d %d\n", w, h, intensity);
     }
 
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wswitch"
     switch (type) {
         case PNM_BIT_ASCII:  r += write_pnm_bit_ascii_data   (f, b, w, h); break;
         case PNM_GRE_ASCII:  r += write_pnm_gray_ascii_data  (f, b, w, h); break;
@@ -328,6 +338,7 @@ int write_pnm_file(FILE * f, pnm_type_t type, const int * b, int w, int h, int i
         case PNM_GRE_BINARY: r += write_pnm_gray_binary_data (f, b, w, h); break;
         case PNM_PIX_BINARY: r += write_pnm_pix_binary_data  (f, b, w, h); break;
     }
+  #pragma GCC diagnostic pop
 
     return r;
 }

@@ -14,6 +14,7 @@
  */
 
 typedef enum {
+    PNM_FORMAT_ERROR,
     /* NOTE:
      *  the order is significant,
      *  because it corresponds to the mime
