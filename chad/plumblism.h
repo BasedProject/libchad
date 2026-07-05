@@ -53,7 +53,7 @@ int read_pnm_header(FILE * f, pnm_type_t type, int * w, int * h, int * intensity
  * It is assumed that `read_pnm_header` has just been called on `f`,
  *  otherwise the file position pointer is going to be misaligned.
  */
-int read_pnm_data(FILE * f, pnm_type_t type, int * b);
+int read_pnm_data(FILE * f, pnm_type_t type, int * b, int size);
 
 /* Write from `b` to `f`.
  * In case of a `PNM_BIT_*`, intensity is ignored.
