@@ -11,6 +11,8 @@
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define CLAMP(a, b, c) ((a) < (b) ? (b) : (a) > (c) ? (c) : (a))
 
+#define ARRAY_COUNT(a) (sizeof((a)) / sizeof(*(a)))
+
 /* Convert argument to a string literal. */
 #define _STRINGIFY(...) # __VA_ARGS__
 #define STRINGIFY(...) _STRINGIFY(__VA_ARGS__)
