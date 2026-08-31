@@ -1,7 +1,7 @@
 #ifndef TERRY_H
 #define TERRY_H
 
-#if !(__STDC_VERSION__ >= 202311L)
+#if !defined(TERRY_NO_VERSION_CHECK) && !(__STDC_VERSION__ >= 202311L)
 #error >=C23 Required
 #endif
 

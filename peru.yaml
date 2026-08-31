@@ -85,4 +85,4 @@ git module pathos:
 git module terry:
     url: https://github.com/BasedProject/terry
     pick: terry.h
-    rev: 75635d32a0035b1117a2e29029ec64ef68e4ff63
+    rev: e97043dbf15772ecc5b3d0b9996a8722cd67430f
