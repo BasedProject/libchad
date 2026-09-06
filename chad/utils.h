@@ -61,4 +61,18 @@ static inline long signum(long x) {
 #define degrees(x) ((RAD2DEG)*(x))
 #define radians(x) ((DEG2RAD)*(x))
 
+#define _is_static_array(A) \
+    _Generic(&(A), typeof(&(A)[0])*: 0, default: 1)
+
+#define _assert_static_array(A) \
+    ((void)sizeof(char[1 - 2 * !_is_static_array(A)]))
+
+#define countof(A) ( \
+    _assert_static_array(A), \
+    (sizeof(A) / sizeof(A[0])) \
+)
+
+#define countof_unsafe(A) \
+    (sizeof(A) / sizeof(A[0]))
+
 #endif
