@@ -24,6 +24,6 @@ else
 .peru/lastimports: peru.yaml
 	@echo "Peru Syncing..."
 	@peru sync 2>/dev/null ||\
-        (echo "NOTICE:\nYour system lacks <https://github.com/buildinspace/peru>\nBuild will continue."; true)
+        (echo -e "Your system lacks <https://github.com/buildinspace/peru>\nBuild will continue."; true)
 	@touch $@ 2>/dev/null || true
 endif
