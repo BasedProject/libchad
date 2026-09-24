@@ -218,6 +218,8 @@ and a clean-cut predicate to choose between items of similar subjects.
     # dedent?
     #
     # lliffe arrays
+    #
+    # function die
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
