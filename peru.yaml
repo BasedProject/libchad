@@ -38,7 +38,7 @@ git module remove_all:
 git module sds:
     url: https://github.com/jcorporation/sds.git
     pick: [sds.c, sds.h, sdsalloc.h]
-    rev: 7df501f5445fde62084ed8539791684df425061d
+    rev: b37d7d1057cf6e052f784c9e21e8613e8665820e
 
 git module strlist:
     url: https://github.com/BasedProject/strlist.git
@@ -67,7 +67,7 @@ git module plumblism:
 
 git module xxx:
     url: https://github.com/agvxov/XXX-h.git
-    rev: 435a7b56995c1c6452be4cd7e5210d45bb7b807c
+    rev: dd30107a9b83c54fdbd82e30221782721c3a2539
 
 git module roman:
     url: https://github.com/agvxov/roman-h.git
