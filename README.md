@@ -210,8 +210,6 @@ and a clean-cut predicate to choose between items of similar subjects.
     #
     # spinners?
     #
-    # dedent?
-    #
     # iliffe arrays
 ```
 

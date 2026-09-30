@@ -12,6 +12,7 @@ LIBRARY.dir := library
 LIBRARY.orig := dictate/dictate.c \
                 dictate/dictate.h \
                 dictate/dictate.hpp \
+                dedent/dedent.h \
                 qx/qx.h \
                 remove_all/remove_all.h \
                 sds/sds.c \

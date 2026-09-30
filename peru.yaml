@@ -1,6 +1,7 @@
 imports:
     dictate:    library/dictate
     dyrect:     library/dyrect
+    dedent:     library/dedent
     kvec:       library/kvec
     libini:     library/libini
     librandom:  library/librandom
@@ -19,6 +20,11 @@ git module dictate:
     export: source/
     pick:   source/
     rev: c3f53e3c3cd168f02dc200a324dbaa9642c4f8af
+
+git module dedent:
+    url: https://github.com/agvxov/dedent.git
+    export: source/
+    pick:   source/dedent.h
 
 git module kvec:
     url: https://github.com/agvxov/haste-containers.git
