@@ -4,3 +4,4 @@
 .peru
 tmp-cmdtest-*
 .cmdtest-filter
+cache/*

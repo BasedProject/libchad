@@ -1,24 +1,31 @@
 imports:
-    dictate:    library/dictate
-    dyrect:     library/dyrect
-    kvec:       library/kvec
-    libini:     library/libini
-    librandom:  library/librandom
-    plumblism:  library/plumblism
-    qx:         library/qx
-    remove_all: library/remove_all
-    roman:      library/roman
-    sds:        library/sds
-    slurp:      library/slurp
-    strlist:    library/strlist
-    terry:      library/terry
-    xxx:        library/XXX
+    dictate:    cache/dictate
+    dyrect:     cache/dyrect
+    dedent:     cache/dedent
+    kvec:       cache/kvec
+    libini:     cache/libini
+    librandom:  cache/librandom
+    plumblism:  cache/plumblism
+    qx:         cache/qx
+    remove_all: cache/remove_all
+    roman:      cache/roman
+    sds:        cache/sds
+    slurp:      cache/slurp
+    strlist:    cache/strlist
+    terry:      cache/terry
+    xxx:        cache/XXX
 
 git module dictate:
     url: https://github.com/agvxov/dictate.git
     export: source/
     pick:   source/
     rev: c3f53e3c3cd168f02dc200a324dbaa9642c4f8af
+
+git module dedent:
+    url: https://github.com/agvxov/dedent.git
+    export: source/
+    pick:   source/dedent.h
+    rev: 3424a02cb464ffe1e051d81039f9bde663ca124a
 
 git module kvec:
     url: https://github.com/agvxov/haste-containers.git
@@ -38,7 +45,7 @@ git module remove_all:
 git module sds:
     url: https://github.com/jcorporation/sds.git
     pick: [sds.c, sds.h, sdsalloc.h]
-    rev: 7df501f5445fde62084ed8539791684df425061d
+    rev: 546363b0c2d0147bbd7110a521f4a592acc4f636
 
 git module strlist:
     url: https://github.com/BasedProject/strlist.git
@@ -67,7 +74,7 @@ git module plumblism:
 
 git module xxx:
     url: https://github.com/agvxov/XXX-h.git
-    rev: 435a7b56995c1c6452be4cd7e5210d45bb7b807c
+    rev: dd30107a9b83c54fdbd82e30221782721c3a2539
 
 git module roman:
     url: https://github.com/agvxov/roman-h.git

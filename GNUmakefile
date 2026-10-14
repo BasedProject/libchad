@@ -5,13 +5,14 @@ TARGET := $(shell basename $$PWD).out
 
 ## 05-external.mk
 
-LIBRARY.dir := library
+LIBRARY.dir := cache
 
 # these will be copied into chad/ ; we expect these to be in ${LIBRARY.dir}/
 
 LIBRARY.orig := dictate/dictate.c \
                 dictate/dictate.h \
                 dictate/dictate.hpp \
+                dedent/dedent.h \
                 qx/qx.h \
                 remove_all/remove_all.h \
                 sds/sds.c \

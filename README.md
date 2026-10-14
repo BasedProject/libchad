@@ -144,10 +144,7 @@ and a clean-cut predicate to choose between items of similar subjects.
 ## Todo
 * peru is FINE as is. Could be improved but there's no need. Peru is not explicitly required in the build.
 * SO MUCH SHIT IS MISSING FROM THE LIBRARY WHAT THE HELL
-- /* #include "chad/XXX.h" */
-- /* #include "chad/dyrect.h" */
-- /* #include "chad/roman.h" */
-- experimental/ro.h should be destroyed from space
+    - experimental/ro.h should be destroyed from space
 * code
 ```sh
     file filesystem.h {
@@ -207,17 +204,13 @@ and a clean-cut predicate to choose between items of similar subjects.
     #
     # colors (../libcolor/)
     #
-    # roman numbers
-    #
     # the number parsing functions of the standard are shit
     #   unsigned parsing wraps, because fuck you
     #   they require null terminated strings
     #
     # spinners?
     #
-    # dedent?
-    #
-    # lliffe arrays
+    # iliffe arrays
 ```
 
 The following items should be considered to be added to libchad, in some way or another:
