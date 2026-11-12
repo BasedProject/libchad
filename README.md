@@ -147,20 +147,6 @@ and a clean-cut predicate to choose between items of similar subjects.
     - experimental/ro.h should be destroyed from space
 * code
 ```sh
-    file filesystem.h {
-        int touch_file(const char * p);
-        int touch_directory(const char * p);
-        int touch(const char * p);  // wrapper based on whether the last char is '/'
-
-        int copy_file(const char * s, const char * d);
-        int copy(const char * s, const char * d);
-        int copy_ex(const char * s, const char * d, int flags);
-
-        int remove(const char * p);
-        int remove_all(const char * p);
-
-        int rename(const char * s, const char * d);
-    }
     tree chad/
         file nargs.h { // for narg hack functions?
             #define coalesce_env() // char * _coalesce_env(char * mydefault, size_t argc, ...)
