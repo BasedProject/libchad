@@ -17,6 +17,9 @@
 #define _STRINGIFY(...) # __VA_ARGS__
 #define STRINGIFY(...) _STRINGIFY(__VA_ARGS__)
 
+#define _CONCATENATE(a, b) a##b
+#define CONCATENATE(a, b) _CONCATENATE(a, b)
+
 /* Prevent argument from being expended as a macro.
  * Named after the POSIX shell rule that quoted strings are not checked for aliases.
  * Note that it only works on maro functions!
